@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js",
-    "dev": "nodemon server.js"
+    "start": "nodemon server.js --trace-warnings",
+    "dev": "nodemon server.js",
+    "trackErr": "nodemon server.js --trace-warning"
   },
   "keywords": [],
   "author": "",

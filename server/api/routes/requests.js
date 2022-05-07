@@ -1,4 +1,3 @@
-const express = require('express');
 const requests = require('../../controllers/requestCtrl');
 
 module.exports = function(router) {

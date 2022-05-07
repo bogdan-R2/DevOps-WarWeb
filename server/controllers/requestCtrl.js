@@ -8,7 +8,7 @@ exports.getRequests = async (req, res, next) => {
     return res.status(200).json({
       success: true,
       count: requests.length,
-      data: stores
+      data: requests
     });
   } catch (err) {
     console.error(err);
@@ -18,19 +18,18 @@ exports.getRequests = async (req, res, next) => {
 
 exports.addRequest = async (req, res, next) => {
   try {
-    const request = await request.create(req.body)
-    .then((request) => {
+    await request.create(req.body)
+    .then(() => {
         res.status(201).send({
         status: true,
         message: "request added succesfully"
-      })
-      .json(request);
+      });
     })
-    .catch((err) => {
+    .catch(() => {
         res.status(400).send({
             status: false,
             message:"Error adding request",
-        }).json(err);
+        });
     });
   } catch (err) {
     console.error(err);

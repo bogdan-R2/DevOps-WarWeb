@@ -1,39 +1,37 @@
 const mongoose = require("mongoose")
 
 const UserSchema = new mongoose.Schema({
-    username: {
-        firstName: String,
-        lastName: String
+    email: {
+        type: String,
+        required: [true, 'PLease proviode your email']
     },
+    fullNname: {
+        type: String
+    },
+    /*
+    role: {
+        type: String,
+        enum: ['Volunteer', 'Refugee'],
+        default: undefined,
+        required: [true, 'Please enter role '
+        //type: String
 
-    roles: {
-        type: String
     },
-    contactInfo: {
-        type: String
-    },
-    location: {
-        type: {
-          type: String,
-          enum: ['Point']
-        },
-        coordinates: {
-          type: [Number],
-          index: '2dsphere'
-        },
-        formattedAddress: String
-    },
-    posteRequests: []
+    */
+    // aka phone number 
+    postedRequests: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"Requests"}],
+        /**
+         * sau 
+         *   postedRequests: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref:"Requests"},
+         *  */ 
+    city: {
+        type: String, 
+        required: [true, "Please select city of the request"]
+    }
 })
-
-UserSchema.pre('save', async function(next) {
-    const loc = await geocoder.geocode(this.address);
-    this.location = {
-      type: 'Point',
-      coordinates: [loc[0].longitude, loc[0].latitude],
-      formattedAddress: loc[0].formattedAddress
-    };
-  });
-  
 
 module.exports = mongoose.model("User", UserSchema)
