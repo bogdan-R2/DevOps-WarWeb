@@ -1,5 +1,35 @@
 const user = require("../models/user");
 
+
+
+exports.getUserByEmail = async (req, res, next) => {
+  try {
+    const qry = {
+      email: req.params.email
+    }
+    console.log(qry);
+    foundUser = user.findOne(qry)
+        .sort({'createdOn': -1})
+        .exec()
+        .then(docs => res.status(200)
+          .json(docs))
+          .catch(err => res.status(500)
+          .json({
+              message: "error finding user by email",
+              error: err
+        }))
+        /*
+    return res.status(200).json({
+      success: true,
+      data: foundUser
+    });*/
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
+
 exports.getAllUsers = async (req, res, next) => {
     try {
       const allUsers = await user.find();
@@ -16,9 +46,23 @@ exports.getAllUsers = async (req, res, next) => {
   };
   
   exports.addUser = async (req, res, next) => {
-    try {
+    //TODO -> REPARAT QUERY
+    /*
+        const qry = {
+          email: req.params.email
+        }
+        console.log(qry);
+        foundUser = user.findOne({email: req.params.email, email: { $exists: true, $ne: undefined }});
+      if(foundUser) {
+          return res.status(409).json({
+          message: "Email already exists"
+      })
+      }
+      else {*/
+      try {
       await user.create(req.body)
       .then(() => {
+        console.log(req.body)
           res.status(201).send({
           status: true,
           message: "request added succesfully"
@@ -30,8 +74,8 @@ exports.getAllUsers = async (req, res, next) => {
               message:"Error adding request",
           });
       })
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ error: 'Server error' });
-    }
+      } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Server error' });
+      }
   };

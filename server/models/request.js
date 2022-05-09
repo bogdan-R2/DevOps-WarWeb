@@ -17,6 +17,10 @@ const RequestSchema = new mongoose.Schema({
         type: String,
         required: [true, 'PLease insert city']
     },
+    country: {
+        type: String, 
+        required: [true, 'Please insert country']
+    },
     /*
     location: {
         locType: {

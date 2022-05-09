@@ -31,6 +31,11 @@ const UserSchema = new mongoose.Schema({
     city: {
         type: String, 
         required: [true, "Please select city of the request"]
+    },
+
+    country: {
+        type: String, 
+        required: [true, 'Please insert a country']
     }
 })
 
