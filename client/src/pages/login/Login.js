@@ -32,7 +32,7 @@ const Login = () => {
         const auth = getAuth();
         try{
         signInWithEmailAndPassword(auth, email, password);
-        navigate('/');
+        navigate('/home');
         }
         catch(error) {
             const errorCode = error.code;

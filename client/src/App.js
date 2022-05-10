@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 
 import React, { useState } from "react";
@@ -8,6 +7,7 @@ import Routing from "./Routing";
 import { GlobalStyle } from "./styles/globalStyle";
 import { darkTheme, lightTheme } from "./styles/theme";
 import HomePage from './pages/home/HomePage';
+import { Header } from './components/header/Header';
 
 export const ThemeContext = React.createContext(null);
 
@@ -28,7 +28,10 @@ const App = () => {
                         rel="stylesheet"
                     />
                 </Helmet>
+
                 <Routing/>
+
+
             </ThemeProvider>
         </ThemeContext.Provider>
     );

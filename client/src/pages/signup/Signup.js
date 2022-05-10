@@ -4,7 +4,7 @@ import firebase from "firebase/compat/app"
 
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
-import { Alert } from 'react-bootstrap';
+import { Alert, Container, Card } from 'react-bootstrap';
 //import { auth } from '../../firebase';
 import { useAuth } from '../../contexts/AuthContext';
 import { Link, useNavigate } from "react-router-dom";
@@ -50,7 +50,7 @@ const Signup = () => {
         }).then((response) => {
                     console.log(response);
                     console.log('ajungem in post?');
-                    navigate("/");
+                    navigate("/home");
                   }, (error) => {
                     console.log(error);
                   })
@@ -68,14 +68,15 @@ const Signup = () => {
     }
 
 return (
-    <>
-   
+  
+    <div className="w-100" style={{ maxWidth: "400px" }}>
+
     <form className="signupform" onSubmit={handleSubmit}>
     
     {error && <Alert variant="danger" >{error}</Alert>}
  
     <fieldset className='filedsets'>
-      <legend>Login</legend>
+      <h4>Register here</h4>
       <div className="form-group row">
         <label htmlFor="staticEmail" className="col-sm-2 col-form-label"></label>
         <div className="col-sm-10">
@@ -128,10 +129,13 @@ return (
      
       <button type="submit" className="btn btn-primary mt-4">Submit</button>
     </fieldset>
-
+    <div className="w-100 text-center mt-2">
+          Already have an account? <Link to="/login">Log In</Link>
+        </div>
   </form>
+  
+</div>
 
-  </>
     );
 
     
