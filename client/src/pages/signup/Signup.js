@@ -4,12 +4,12 @@ import firebase from "firebase/compat/app"
 
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
-import { Container } from 'react-bootstrap';
+import { Alert } from 'react-bootstrap';
 //import { auth } from '../../firebase';
 import { useAuth } from '../../contexts/AuthContext';
 import { Link, useNavigate } from "react-router-dom";
 
-import styles from './Signup.css'
+import './Signup.css'
 
 // http://127.0.0.1:5000"
 const API = process.env.REACT_APP_API;
@@ -24,7 +24,6 @@ const Signup = () => {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const [user, setUser] = useState();
-    const [errorMessage, setErrorMessage] = useState('');
     const auth = getAuth();
     const navigate = useNavigate();
 
@@ -33,10 +32,12 @@ const Signup = () => {
         console.log(API);
         console.log(email);
         console.log(password);
-        setErrorMessage("");
+        setError("");
+
+
                
-        createUserWithEmailAndPassword(auth, email, password);
-       
+        createUserWithEmailAndPassword(auth, email, password)
+       .then(() => {
         axios({
             method: 'post',
             url: 'http://127.0.0.1:5000/api/user',
@@ -56,35 +57,39 @@ const Signup = () => {
         .catch((err) => {
             if (err.response) {
                 console.log(error.response.data.message);
+                setError("Could not create account")
             }
-        })          
+        }) 
+       }).catch((error) => {
+           console.log(error.message)
+          setError("Email already exists")
+       })
+                 
     }
 
 return (
-    <Container
-      className="d-flex align-items-center justify-content-center"
-      style={{ minHeight: "100vh" }}>
-    <form className="signupform" onSubmit={handleSubmit} style={styles}>
-    <fieldset>
-      <legend>Legend</legend>
+    <>
+   
+    <form className="signupform" onSubmit={handleSubmit}>
+    
+    {error && <Alert variant="danger" >{error}</Alert>}
+ 
+    <fieldset className='filedsets'>
+      <legend>Login</legend>
       <div className="form-group row">
-        <label htmlFor="staticEmail" className="col-sm-2 col-form-label">Email</label>
+        <label htmlFor="staticEmail" className="col-sm-2 col-form-label"></label>
         <div className="col-sm-10">
-          <input type="text" readOnly className="form-control-plaintext" id="staticEmail" defaultValue="email@example.com" />
+          <input type="text" readOnly className="form-control-plaintext mt-2" id="staticEmail" defaultValue="email@example.com" />
           
         </div>
       </div>
       <div className="form-group">
-        <label htmlFor="exampleInputEmail1" className="form-label mt-4">Email address</label>
+        <label htmlFor="exampleInputEmail1" className="form-label mt-4 md-2">Email address</label>
         <input type="email" 
         onChange={e => setEmail(e.target.value)} 
         value={email}
         className="form-control" id="exampleInputEmail1"  placeholder="Enter email" autoFocus/>
     </div>
-    <span className="text-danger">{errorMessage}</span>
-
-
-
     <div className="form-group">
         <label htmlFor="exampleInputPassword" className="form-label mt-4">Password</label>
         <input type="text" 
@@ -92,7 +97,7 @@ return (
         value={password}
         className="form-control" id="inputName" placeholder="Enter password" autoFocus/>
     </div>    
-        <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+    
      
         <div className="form-group">
         <label d="inputName" className="form-label mt-4">Name</label>
@@ -121,11 +126,12 @@ return (
       </div>
 
      
-      <button type="submit" className="btn btn-primary">Submit</button>
+      <button type="submit" className="btn btn-primary mt-4">Submit</button>
     </fieldset>
-  </form>
-  </Container>
 
+  </form>
+
+  </>
     );
 
     
