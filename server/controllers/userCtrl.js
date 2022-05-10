@@ -46,19 +46,6 @@ exports.getAllUsers = async (req, res, next) => {
   };
   
   exports.addUser = async (req, res, next) => {
-    //TODO -> REPARAT QUERY
-    /*
-        const qry = {
-          email: req.params.email
-        }
-        console.log(qry);
-        foundUser = user.findOne({email: req.params.email, email: { $exists: true, $ne: undefined }});
-      if(foundUser) {
-          return res.status(409).json({
-          message: "Email already exists"
-      })
-      }
-      else {*/
       try {
       await user.create(req.body)
       .then(() => {

@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import HeroImg from "../../assets/img/peace-landing-svg.svg";
 //src={require('../../assets/img/peace-landing-svg.svg')}
 import { Header } from "../../components/header/Header";
-
+import Headbar from "../../components/headbar/Headbar";
 const LandingPage = () => {
     const navigate = useNavigate();
 
@@ -14,7 +14,7 @@ const LandingPage = () => {
   return (
       
       <>
-      <Header/>
+      
     <section className="HeroSec">
       <div className="contentWrapper">
         <div className="leftContent">

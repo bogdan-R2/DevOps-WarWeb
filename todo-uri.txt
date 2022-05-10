@@ -7,3 +7,5 @@ to start server in server:
 packages
 
 npm i express mongoose cors dotenv body-parser 
+
+- add private routes with firebase help

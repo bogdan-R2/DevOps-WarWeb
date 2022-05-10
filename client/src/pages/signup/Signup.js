@@ -26,18 +26,16 @@ const Signup = () => {
     const [user, setUser] = useState();
     const auth = getAuth();
     const navigate = useNavigate();
+    
 
     const handleSubmit = async (e) => {
         console.log("sending");
-        console.log(API);
-        console.log(email);
-        console.log(password);
-        setError("");
-
-
-               
-        createUserWithEmailAndPassword(auth, email, password)
-       .then(() => {
+        
+        setError("");     
+        setUser(getAuth().getUserByEmail(email));
+        console.log(user.email)   
+        try { createUserWithEmailAndPassword(auth, email, password)
+       .then (() => {
         axios({
             method: 'post',
             url: 'http://127.0.0.1:5000/api/user',
@@ -47,23 +45,30 @@ const Signup = () => {
                 city: city,
                 country: country
          }
-        }).then((response) => {
+        }).then(function (response) {
                     console.log(response);
                     console.log('ajungem in post?');
                     navigate("/home");
                   }, (error) => {
-                    console.log(error);
+                      setError(error);
+                    throw new Error(error);
                   })
         .catch((err) => {
             if (err.response) {
                 console.log(error.response.data.message);
-                setError("Could not create account")
+                throw new Error(err);
+            }
+        }).catch((error) => {
+            if (error.response) {
+                console.log(error.response.data.message);
+                throw new Error(error);
             }
         }) 
-       }).catch((error) => {
+       })} catch(error) {
            console.log(error.message)
-          setError("Email already exists")
-       })
+          setError(error.message)
+          throw new Error(error);
+       }
                  
     }
 

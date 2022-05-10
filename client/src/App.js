@@ -28,7 +28,6 @@ const App = () => {
                         rel="stylesheet"
                     />
                 </Helmet>
-
                 <Routing/>
 
 
