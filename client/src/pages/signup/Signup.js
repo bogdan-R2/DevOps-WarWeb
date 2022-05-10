@@ -36,7 +36,7 @@ const Signup = () => {
 
 
                
-        createUserWithEmailAndPassword(auth, email, password)
+        await createUserWithEmailAndPassword(auth, email, password)
        .then(() => {
         axios({
             method: 'post',
