@@ -27,7 +27,7 @@ const Signup = () => {
     
 
 
-    async function getExistingUser() {
+    async function geExistingUser() {
       try {
         const response = await axios.get("/user_login/john1904");
         setUser(response);
@@ -40,7 +40,6 @@ const Signup = () => {
 
     async function postUser() {
       try {
-        console.log('ajunge in post')
         axios({
         method: 'post',
         url: 'http://127.0.0.1:5000/api/user',
@@ -58,28 +57,25 @@ const Signup = () => {
 
     async function handleSubmit() {
         console.log("sending");
-        setErrorMessage("");
-        createUserWithEmailAndPassword(auth, email, password);
-        postUser();
-
-        /*
+        setError("");
 
         try {
           getExistingUser();
           if(user != null) {
-            console.log("ahunge aici ???")
-            console.log("user exists")
+            setErrorMessage("user already exists")
           }
           else {
             createUserWithEmailAndPassword(auth, email, password)
             postUser();
 
           }
+
+          }
       } catch (error) {
         console.log(error);
-      }*/
+      }
 
-/*
+
         getAuth()
         .getUserByEmail(email)
         .then((userRecord) => {
@@ -126,7 +122,7 @@ const Signup = () => {
            console.log(error.message)
           setError(error.message)
           throw new Error(error);
-       });*/
+       });
                  
     }
 
@@ -136,6 +132,7 @@ return (
 
     <form className="signupform" onSubmit={handleSubmit}>
     
+    {error && <Alert variant="danger" >{error}</Alert>}
  
     <fieldset className='filedsets'>
       <h4>Register here</h4>

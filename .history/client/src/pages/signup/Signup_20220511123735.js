@@ -40,7 +40,6 @@ const Signup = () => {
 
     async function postUser() {
       try {
-        console.log('ajunge in post')
         axios({
         method: 'post',
         url: 'http://127.0.0.1:5000/api/user',
@@ -59,10 +58,6 @@ const Signup = () => {
     async function handleSubmit() {
         console.log("sending");
         setErrorMessage("");
-        createUserWithEmailAndPassword(auth, email, password);
-        postUser();
-
-        /*
 
         try {
           getExistingUser();
@@ -77,7 +72,7 @@ const Signup = () => {
           }
       } catch (error) {
         console.log(error);
-      }*/
+      }
 
 /*
         getAuth()

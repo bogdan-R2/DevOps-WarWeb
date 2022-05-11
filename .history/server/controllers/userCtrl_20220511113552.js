@@ -1,4 +1,4 @@
-const User = require("../models/user");
+const user = require("../models/user");
 
 
 
@@ -8,7 +8,7 @@ exports.getUserByEmail = async (req, res, next) => {
       email: req.params.email
     }
     console.log(qry);
-    foundUser = User.findOne(qry)
+    foundUser = user.findOne(qry)
         .sort({'createdOn': -1})
         .exec()
         .then(docs => res.status(200)
@@ -32,7 +32,7 @@ exports.getUserByEmail = async (req, res, next) => {
 
 exports.getAllUsers = async (req, res, next) => {
     try {
-      const allUsers = await User.find();
+      const allUsers = await user.find();
   
       return res.status(200).json({
         success: true,
@@ -46,34 +46,7 @@ exports.getAllUsers = async (req, res, next) => {
   };
   
   exports.addUser = async (req, res) => {
-    try {
-    let query = req.body.email; //Extract title from input form
-    User.findOne({email:query}, function(err, foundUser){
-        if(err) console.log(err);
-        if ( foundUser){
-            console.log("This email is already registered");
-        } else {
- 
-            let newUser = new User(req.body);
-            newUser.save(function(err, example) {
-                if(err) console.log(err);
-                console.log("New example created");
-                
-            });
-        }
-    });}
-    catch (error) {
-      res.status(500).json({ error: 'Server error' });
-    }
-};
-
-    
-    
-    /*
       try {
-      
-        const qry = req.body.email
-      
       await user.create(req.body)
       .then(() => {
         console.log(req.body)
@@ -91,5 +64,5 @@ exports.getAllUsers = async (req, res, next) => {
       } catch (err) {
         console.error(err);
         res.status(500).json({ error: 'Server error' });
-      }*/
-  
+      }
+  };

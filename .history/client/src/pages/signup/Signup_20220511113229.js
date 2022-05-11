@@ -11,7 +11,9 @@ import { Link, useNavigate } from "react-router-dom";
 
 import './Signup.css'
 
+// http://127.0.0.1:5000"
 const API = process.env.REACT_APP_API;
+//const API = "http://127.0.0.1:5000"
 const Signup = () => {
 
     const [fullName, setFullName] = useState('');
@@ -19,67 +21,17 @@ const Signup = () => {
     const [password, setPassword] = useState('');
     const [country, setCountry] = useState('');
     const [city, setCity] = useState('');
-    const [errorMessage, setErrorMessage] = useState("");
+    const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const [user, setUser] = useState();
     const auth = getAuth();
     const navigate = useNavigate();
     
 
-
-    async function getExistingUser() {
-      try {
-        const response = await axios.get("/user_login/john1904");
-        setUser(response);
-        console.log(response);
-      }
-      catch (error) {
-        console.log(error);
-      }
-    }
-
-    async function postUser() {
-      try {
-        console.log('ajunge in post')
-        axios({
-        method: 'post',
-        url: 'http://127.0.0.1:5000/api/user',
-        data: {
-            email: email, 
-            fullName: fullName,
-            city: city,
-            country: country
-     }
-    })}
-      catch (error) {
-        setErrorMessage(error);
-      }
-    }
-
     async function handleSubmit() {
         console.log("sending");
-        setErrorMessage("");
-        createUserWithEmailAndPassword(auth, email, password);
-        postUser();
+        setError("");
 
-        /*
-
-        try {
-          getExistingUser();
-          if(user != null) {
-            console.log("ahunge aici ???")
-            console.log("user exists")
-          }
-          else {
-            createUserWithEmailAndPassword(auth, email, password)
-            postUser();
-
-          }
-      } catch (error) {
-        console.log(error);
-      }*/
-
-/*
         getAuth()
         .getUserByEmail(email)
         .then((userRecord) => {
@@ -88,8 +40,9 @@ const Signup = () => {
         })
         .catch((error) => {
           console.log('Error fetching user data:', error);
+          navigate("/")
         });
-            
+        /*     
         setUser(getAuth().getUserByEmail(email));
         console.log(user.email)   
         createUserWithEmailAndPassword(auth, email, password)
@@ -136,6 +89,7 @@ return (
 
     <form className="signupform" onSubmit={handleSubmit}>
     
+    {error && <Alert variant="danger" >{error}</Alert>}
  
     <fieldset className='filedsets'>
       <h4>Register here</h4>

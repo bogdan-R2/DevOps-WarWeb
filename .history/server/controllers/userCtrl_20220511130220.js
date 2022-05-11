@@ -46,7 +46,7 @@ exports.getAllUsers = async (req, res, next) => {
   };
   
   exports.addUser = async (req, res) => {
-    try {
+    
     let query = req.body.email; //Extract title from input form
     User.findOne({email:query}, function(err, foundUser){
         if(err) console.log(err);
@@ -58,13 +58,10 @@ exports.getAllUsers = async (req, res, next) => {
             newUser.save(function(err, example) {
                 if(err) console.log(err);
                 console.log("New example created");
-                
+                res.redirect(`/`);
             });
         }
-    });}
-    catch (error) {
-      res.status(500).json({ error: 'Server error' });
-    }
+    });
 };
 
     

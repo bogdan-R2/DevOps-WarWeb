@@ -21,7 +21,7 @@ const Signup = () => {
     const [city, setCity] = useState('');
     const [errorMessage, setErrorMessage] = useState("");
     const [loading, setLoading] = useState(false);
-    const [user, setUser] = useState();
+    const [user, setUser] = useState({});
     const auth = getAuth();
     const navigate = useNavigate();
     
@@ -40,7 +40,6 @@ const Signup = () => {
 
     async function postUser() {
       try {
-        console.log('ajunge in post')
         axios({
         method: 'post',
         url: 'http://127.0.0.1:5000/api/user',
@@ -59,15 +58,10 @@ const Signup = () => {
     async function handleSubmit() {
         console.log("sending");
         setErrorMessage("");
-        createUserWithEmailAndPassword(auth, email, password);
-        postUser();
-
-        /*
 
         try {
           getExistingUser();
-          if(user != null) {
-            console.log("ahunge aici ???")
+          if(errorMessage != "") {
             console.log("user exists")
           }
           else {
@@ -77,7 +71,7 @@ const Signup = () => {
           }
       } catch (error) {
         console.log(error);
-      }*/
+      }
 
 /*
         getAuth()

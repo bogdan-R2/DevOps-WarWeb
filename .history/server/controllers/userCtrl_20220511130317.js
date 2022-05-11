@@ -58,7 +58,7 @@ exports.getAllUsers = async (req, res, next) => {
             newUser.save(function(err, example) {
                 if(err) console.log(err);
                 console.log("New example created");
-                
+                res.redirect(`/`);
             });
         }
     });}

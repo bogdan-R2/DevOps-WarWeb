@@ -19,7 +19,7 @@ const LandingPage = () => {
       <div className="contentWrapper">
         <div className="leftContent">
         <h2>Do you want to help or need help?</h2>
-        <button type="button" className="btn btn-primary btn-lg" onClick={handleClick}>Register Now</button>
+        <button type="button" class="btn btn-primary btn-lg" onClick={handleClick}>Register Now</button>
         <p className="w-100 text-left"/> Already have an account? <Link to="/login">Log In</Link>
         </div>
         <div className="rigthContent">
