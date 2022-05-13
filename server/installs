@@ -1,0 +1,39 @@
+Error: Cannot find module 'node-geocoder'
+
+npm init in app server to init the packages for server
+also 
+npx react-create-app client cevva de genul
+npm i bcryptjs body-parser concurrently express is-empty jsonwebtoken mongoose passport passport-jwt validator
+npm i -D nodemon
+nodemon run server -  to run serever
+mkdir config && cd config && touch databse.js
+in server in power shell 
+npm install nodemon 
+npm install body-parser cors express mongoose
+
+- pluralsight fundamnetals of mongoose for nodejs and mongodb 
+- prerequisites:
+  npm install --save express
+  npm install --save-dev eslint 
+  npm install --save body-parser
+  npm install --save cors
+   : cross orgin resource sharign issues
+  npm install --save morgan - request logger
+  npm install -g nodemon - watcehr that automatically restarts the server 
+  npm install --save mongoose - mongo db 
+  npm install --save axios
+  npm install --save material-design-icons-iconfont 
+  npm install --save-dev webpack
+  npm install node-geocoder
+
+  {
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "npm run lint & nodemon index.js", 
+    "lint": "./node_modules/.bin/eslint **/*.js"
+  },
+
+  

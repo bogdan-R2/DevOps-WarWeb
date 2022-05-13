@@ -1,0 +1,11 @@
+to start server in server:
+    npm init -y
+
+- first step:
+    we define our schemas for the database and connect to mongo local db
+
+packages
+
+npm i express mongoose cors dotenv body-parser 
+
+- add private routes with firebase help
