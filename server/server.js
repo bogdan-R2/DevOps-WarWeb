@@ -5,7 +5,7 @@ const cors = require('cors')
 const api = require("./api")
 const morgan =  require("morgan")
 const config = require('./config/database');
-
+const server = require('http').createServer();
 
 const app = express();
 

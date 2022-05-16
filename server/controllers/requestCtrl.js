@@ -1,4 +1,4 @@
-const request = require('../models/Request');
+const request = require('../models/request.js');
 
 
 exports.getRequests = async (req, res, next) => {
