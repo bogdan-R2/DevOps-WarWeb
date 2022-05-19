@@ -64,7 +64,7 @@ useEffect(() => {
 }, []);
 
 const getAllRequests = () => {
-    axios.get("http://127.0.0.1:5000/api/request")
+    axios.get("http://127.0.0.1:5000/api/users")
     .then((response) => {
         const allRequests = response.data.data;
         setRequestList(allRequests);

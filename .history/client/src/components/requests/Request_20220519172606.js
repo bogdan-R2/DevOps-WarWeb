@@ -11,7 +11,7 @@ const Request = (props) => {
 
 return(
 <>
-<div className="card text-white bg-primary mb-3">
+<div className="card text-white bg-primary mb-3" >
   <div className="card-header">Header</div>
   <div className="card-body">
   <h2 className="card-title">{props.userRequest.requestType}</h2>

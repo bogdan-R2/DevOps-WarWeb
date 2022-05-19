@@ -29,6 +29,9 @@ const App = () => {
                         rel="stylesheet"
                     />
                 </Helmet>
+                <FetchProvider>
+                    
+                </FetchProvider>
                 <Routing/>
             </ThemeProvider>
         </ThemeContext.Provider>

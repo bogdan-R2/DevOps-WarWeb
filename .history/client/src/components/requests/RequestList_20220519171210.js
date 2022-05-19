@@ -59,39 +59,51 @@ useEffect (() => {
 }, [])
 */
 
-useEffect(() => {
-    getAllRequests();
-}, []);
 
-const getAllRequests = () => {
-    axios.get("http://127.0.0.1:5000/api/request")
-    .then((response) => {
-        const allRequests = response.data.data;
-        setRequestList(allRequests);
-    })
-    .catch(error => console.error(`Error: ${error}`));
-}
+useEffect (() => { 
+    const  getRequests = async () => {
+        //let requests = [];
+      
+          // Initially, userType.value is set {}
+          //requests = await fetchAllRequests();
+          //console.log("what is this " + requests);
+          //console.log("first in his name" +requests[0].city )
+         setLoading(true);
+          try {
+            const {requestList :response} = await axios.get("http://127.0.0.1:5000/api/request");
+            setRequestList(response.data.data);
+            setLoading(false);
+          } catch (err) {
+              throw new Error(err.message);
+          } 
+          //setLoading(false);
+          //console.log("ce e in requests" + requests.data.data[0].city);
+         // setRequestList(requests.data.data);
+      
+  };
+
+  getRequests();
+}, [])
 
 
-//console.log(requestList[0].city)
+console.log(requestList[0].city)
 if(loading) {
     return <h1>Loading Data.........</h1>
 }
 if(!loading) {
 return(
     <>
+    {loading && <div>Loading</div>}
     {/*{!requestList.isFetching  && (*/}
-    
+    {!loading && (
     <Grid container spacing={3}>
     {requestList.map(request => (
-        <li key={request._id}>
         <Request 
         userRequest = {request}
         />
-     </li>
     ))}
 
-    </Grid>
+    </Grid>)}
     </>
     );
 } };

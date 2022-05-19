@@ -64,7 +64,7 @@ useEffect(() => {
 }, []);
 
 const getAllRequests = () => {
-    axios.get("http://127.0.0.1:5000/api/request")
+    axios.get("http://127.0.0.1:5000/api/users")
     .then((response) => {
         const allRequests = response.data.data;
         setRequestList(allRequests);
@@ -73,25 +73,24 @@ const getAllRequests = () => {
 }
 
 
-//console.log(requestList[0].city)
+console.log(requestList[0].city)
 if(loading) {
     return <h1>Loading Data.........</h1>
 }
 if(!loading) {
 return(
     <>
+    {loading && <div>Loading</div>}
     {/*{!requestList.isFetching  && (*/}
-    
+    {!loading && (
     <Grid container spacing={3}>
     {requestList.map(request => (
-        <li key={request._id}>
         <Request 
         userRequest = {request}
         />
-     </li>
     ))}
 
-    </Grid>
+    </Grid>)}
     </>
     );
 } };

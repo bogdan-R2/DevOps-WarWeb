@@ -10,9 +10,8 @@ const RequestList = () => {
 
     const [error, setError] = useState("");
     const [requestList, setRequestList] = useState([]);
-    const [loading, setLoading] = useState(false);
     const [userData, setUserData] = useState({value: [], isFetching:false});
-   // const {fetchAllRequests, fetchUserByEmail} = useFetch();
+    const {fetchAllRequests, fetchUserByEmail} = useFetch();
 /*
     const [userEmail, setUserEmail] = useState({})
   
@@ -59,41 +58,46 @@ useEffect (() => {
 }, [])
 */
 
-useEffect(() => {
-    getAllRequests();
-}, []);
 
-const getAllRequests = () => {
-    axios.get("http://127.0.0.1:5000/api/request")
-    .then((response) => {
-        const allRequests = response.data.data;
-        setRequestList(allRequests);
-    })
-    .catch(error => console.error(`Error: ${error}`));
-}
+useEffect (() => { 
+    async function getRequests() {
+        //let requests = [];
+      
+          // Initially, userType.value is set {}
+          //requests = await fetchAllRequests();
+          //console.log("what is this " + requests);
+          //console.log("first in his name" +requests[0].city )
+          await axios.get("http://127.0.0.1:5000/api/request")
+          .then(response => {
+              setRequestList(response.data.data);
+          })
+          .catch((err) => {
+              throw new Error(err);
+          }) ;
+          //console.log("ce e in requests" + requests.data.data[0].city);
+         // setRequestList(requests.data.data);
+      
+  };
 
+  getRequests();
+}, [])
 
-//console.log(requestList[0].city)
-if(loading) {
-    return <h1>Loading Data.........</h1>
-}
-if(!loading) {
+console.log("dar requestlist cat e " + requestList);
+console.log("hei cate e prima valoare" + requestList[0].city);
+
 return(
     <>
     {/*{!requestList.isFetching  && (*/}
-    
     <Grid container spacing={3}>
     {requestList.map(request => (
-        <li key={request._id}>
         <Request 
         userRequest = {request}
         />
-     </li>
     ))}
 
     </Grid>
     </>
     );
-} };
+};
 
 export default RequestList;

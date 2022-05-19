@@ -25,7 +25,7 @@ async function fetchAllRequests() {
         console.log(error.message);
         throw new Error(error);
     }
-    if(reqData !== null) {
+    if(reqData) {
         requests = reqData.data.data;
         console.log("inainte de requestul din fetch")
         console.log(requests);

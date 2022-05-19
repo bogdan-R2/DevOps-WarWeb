@@ -12,6 +12,7 @@ import { getAuth } from "firebase/auth";
 const Routing = () => {
 
     return (
+        <FetchProvider>
         <Router>
             <Routes>
                 <Route path="/home" element={<HomePage/>}/>
@@ -21,6 +22,7 @@ const Routing = () => {
                 <Route exact path="/all-requests" element={<RequestList/>}/>
             </Routes>
         </Router>
+        </FetchProvider>
         
     );
 };

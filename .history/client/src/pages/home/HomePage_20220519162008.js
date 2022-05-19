@@ -11,6 +11,11 @@ import { useFetch } from '../../contexts/FetchContext';
 
 
 const HomePage = () => {
+
+
+    const [userEmail, setUserEmail] = useState({});
+    const [currentUser, setCurrentUser] = useState({});
+
     
 
     return (

@@ -4,15 +4,14 @@ import Request from "./Request";
 import {Grid} from "@mui/material"
 import { useFetch } from "../../contexts/FetchContext";
 import { getAuth } from "firebase/auth";
-import axios from 'axios';
+
 
 const RequestList = () => {
 
     const [error, setError] = useState("");
     const [requestList, setRequestList] = useState([]);
-    const [loading, setLoading] = useState(false);
     const [userData, setUserData] = useState({value: [], isFetching:false});
-   // const {fetchAllRequests, fetchUserByEmail} = useFetch();
+    const {fetchAllRequests, fetchUserByEmail} = useFetch();
 /*
     const [userEmail, setUserEmail] = useState({})
   
@@ -43,6 +42,29 @@ useEffect (() => {
     const setAsyncRequestsData = async () => {
       try {
           // Initially, userType.value is set {}
+          setRequestList({value: requestList.value, isFetching: true});
+          const requests = await fetchAllRequests();
+          console.log("what is this " + requests);
+          console.log("first in his name" +requests[0].city )
+          setRequestList({value: requests, isFetching: false});
+          console.log("dar requestlist cat e " + requestList.value);
+      } catch (err) {
+        setRequestList({value: requestList.value, isFetching: false});
+          console.log(err);
+          throw new Error(err);
+      }
+  };
+
+  setAsyncRequestsData();
+}, [])
+*/
+
+useEffect (() => { 
+    const setAsyncRequestsData = async () => {
+        const requests = [];
+      try {
+          // Initially, userType.value is set {}
+          setRequestList({value: requestList.value, isFetching: true});
           const requests = await fetchAllRequests();
           console.log("what is this " + requests);
           console.log("first in his name" +requests[0].city )
@@ -57,43 +79,22 @@ useEffect (() => {
 
   setAsyncRequestsData();
 }, [])
-*/
-
-useEffect(() => {
-    getAllRequests();
-}, []);
-
-const getAllRequests = () => {
-    axios.get("http://127.0.0.1:5000/api/request")
-    .then((response) => {
-        const allRequests = response.data.data;
-        setRequestList(allRequests);
-    })
-    .catch(error => console.error(`Error: ${error}`));
-}
 
 
-//console.log(requestList[0].city)
-if(loading) {
-    return <h1>Loading Data.........</h1>
-}
-if(!loading) {
+
 return(
     <>
     {/*{!requestList.isFetching  && (*/}
-    
     <Grid container spacing={3}>
     {requestList.map(request => (
-        <li key={request._id}>
         <Request 
         userRequest = {request}
         />
-     </li>
     ))}
 
     </Grid>
     </>
     );
-} };
+};
 
 export default RequestList;
