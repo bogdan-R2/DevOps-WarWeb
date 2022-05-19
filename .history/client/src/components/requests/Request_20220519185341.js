@@ -12,8 +12,6 @@ const Request = (props) => {
 
 return(
 <>
-<div className="card" style={{width:'22rem'}}>
-
 <div className="card text-white bg-primary mb-3" >
   <div className="card-header">Header</div>
   <div className="card-body">
@@ -24,7 +22,6 @@ return(
     <p className="card-text">{props.userRequest.description}</p>
 
   </div>
-</div>
 </div>
 </>
     );

@@ -3,11 +3,7 @@ const request = require('../models/Request');
 
 exports.getRequests = async (req, res, next) => {
   try {
-
-    const qry = {
-      requestType: "Request",
-    }
-    const requests = await request.find(qry);
+    const requests = await request.find();
 
     return res.status(200).json({
       success: true,
@@ -23,10 +19,7 @@ exports.getRequests = async (req, res, next) => {
 
 exports.getOffers = async (req, res, next) => {
   try {
-    const qry = {
-      requestType: "Offer",
-    }
-    const requests = await request.find(qry);
+    const requests = await request.find();
 
     return res.status(200).json({
       success: true,
@@ -49,10 +42,10 @@ exports.addRequest = async (req, res, next) => {
         message: "request added succesfully"
       });
     })
-    .catch((error) => {
+    .catch(() => {
         res.status(400).send({
             status: false,
-            message:error.message,
+            message:"Error adding request",
         });
     });
   } catch (err) {

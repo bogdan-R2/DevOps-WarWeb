@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { useNavigate } from "react-router";
 import Request from "./Request";
-import {Grid, ListItem} from "@mui/material"
+import {Grid} from "@mui/material"
 import { useFetch } from "../../contexts/FetchContext";
 import { getAuth } from "firebase/auth";
 import axios from 'axios';
@@ -82,14 +82,14 @@ return(
     <>
     {/*{!requestList.isFetching  && (*/}
     
-    <Grid container margin={3} padding={5} spacing={3}>
+    <Grid container margin={5} padding={10} spacing={3}>
         
     {requestList.map(request => (
-        <Grid item={request._id}>
+        <ul key={request._id}>
         <Request 
         userRequest = {request}
         />
-        </Grid>
+     </ul>
     ))}
 
     </Grid>

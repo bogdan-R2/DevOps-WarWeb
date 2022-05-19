@@ -129,7 +129,7 @@ const setAsyncUserEmail = async () => {
 
   <Navbar bg="dark" variant="dark">
     <Container>
-      <Navbar.Brand href="/home">
+      <Navbar.Brand href="#home">
         <img
           alt=""
           src="/logo.svg"
@@ -143,12 +143,11 @@ const setAsyncUserEmail = async () => {
      <button type="button" className="btn btn-primary mr-2 ml-2">
           See all requests
      </button>
-     </Link>
-     <Link to="/all-offers">
-     <button type="button" className="btn btn-primary mr-2 ml-2">
+
+     <button type="button" className="btn btn-primary">
           See all offers
      </button>
-     </Link>
+ </Link>
     </Container>
   </Navbar>
 )}

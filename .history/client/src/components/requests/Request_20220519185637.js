@@ -12,7 +12,7 @@ const Request = (props) => {
 
 return(
 <>
-<div className="card" style={{width:'22rem'}}>
+<div className="card" style={{maxWidth:'22rem'}}>
 
 <div className="card text-white bg-primary mb-3" >
   <div className="card-header">Header</div>

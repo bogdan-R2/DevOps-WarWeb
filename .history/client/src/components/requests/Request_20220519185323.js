@@ -12,8 +12,7 @@ const Request = (props) => {
 
 return(
 <>
-<div className="card" style={{width:'22rem'}}>
-
+<Grid item xs={8}>
 <div className="card text-white bg-primary mb-3" >
   <div className="card-header">Header</div>
   <div className="card-body">
@@ -25,7 +24,7 @@ return(
 
   </div>
 </div>
-</div>
+</Grid>
 </>
     );
 };

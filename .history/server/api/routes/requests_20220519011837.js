@@ -6,7 +6,4 @@ router
   .route('/request')
   .get(requests.getRequests)
   .post(requests.addRequest);
-
-router.get('/request/offers', requests.getOffers);
-
 }

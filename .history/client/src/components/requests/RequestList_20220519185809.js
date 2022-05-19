@@ -85,11 +85,11 @@ return(
     <Grid container margin={3} padding={5} spacing={3}>
         
     {requestList.map(request => (
-        <Grid item={request._id}>
+        <ul key={request._id}>
         <Request 
         userRequest = {request}
         />
-        </Grid>
+        </ul>
     ))}
 
     </Grid>

@@ -7,6 +7,6 @@ router
   .get(requests.getRequests)
   .post(requests.addRequest);
 
-router.get('/request/offers', requests.getOffers);
+router.get('/requests/offers', requests.getOffers);
 
 }

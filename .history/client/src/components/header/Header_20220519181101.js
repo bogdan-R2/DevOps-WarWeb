@@ -24,8 +24,10 @@ const Header = () => {
 
   let subtitle;
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [userEmail, setUserEmail] = useState({value: {}, isFetching: false});
-  const [currentUser, setCurrentUser] = useState({value: {}, isFetching: false});
+  //const [userEmail, setUserEmail] = useState({value: {}, isFetching: false});
+  //const [currentUser, setCurrentUser] = useState({value: {}, isFetching: false});
+  const [userEmail, setUserEmail] = useState({});
+  const [currentUser, setCurrentUser] = useState({});
   const [user, loading, error] = useAuthState(auth);
 
   function openModal() {
@@ -52,12 +54,12 @@ const setAsyncUserEmail = async () => {
       try {
         //setUserEmail(getAuth().currentUser.email);
         //setUserEmail(getAuth().currentUser.email);
-        setUserEmail({value: userEmail.value, isFetching: true})
+       /// setUserEmail({value: userEmail.value, isFetching: true})
         //const userEmailValue = getAuth().currentUser.email;
         const userEmailValue = user.email;
         console.log("user email value " + userEmailValue);
         if(!userEmail) {
-          setUserEmail({value: {}, isFetching: false})
+          setUserEmail(userEmailValue);
         }else 
           setUserEmail({value: userEmailValue, isFetching: false})
 
@@ -129,7 +131,7 @@ const setAsyncUserEmail = async () => {
 
   <Navbar bg="dark" variant="dark">
     <Container>
-      <Navbar.Brand href="/home">
+      <Navbar.Brand href="#home">
         <img
           alt=""
           src="/logo.svg"
@@ -139,16 +141,6 @@ const setAsyncUserEmail = async () => {
         />{' '}
         WarWeb
       </Navbar.Brand>
-      <Link to="/all-requests">
-     <button type="button" className="btn btn-primary mr-2 ml-2">
-          See all requests
-     </button>
-     </Link>
-     <Link to="/all-offers">
-     <button type="button" className="btn btn-primary mr-2 ml-2">
-          See all offers
-     </button>
-     </Link>
     </Container>
   </Navbar>
 )}

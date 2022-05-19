@@ -6,7 +6,7 @@ import LandingPage from "./pages/landingPage/LandingPage";
 import Login from "./pages/login/Login";
 import Signup from "./pages/signup/Signup";
 import RequestList from "./components/requests/RequestList"
-import OfferList from "./components/offers/OfferList"
+import OfferList from "./components/requests/RequestList"
 
 import { useState, useEffect } from "react";
 import { getAuth } from "firebase/auth";

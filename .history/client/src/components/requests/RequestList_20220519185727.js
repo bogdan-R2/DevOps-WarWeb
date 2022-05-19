@@ -82,14 +82,16 @@ return(
     <>
     {/*{!requestList.isFetching  && (*/}
     
-    <Grid container margin={3} padding={5} spacing={3}>
+    <Grid container margin={5} padding={10} spacing={3}>
         
     {requestList.map(request => (
-        <Grid item={request._id}>
+        <ul key={request._id}>
+            <Grid item xs={8}>
         <Request 
         userRequest = {request}
         />
         </Grid>
+        </ul>
     ))}
 
     </Grid>

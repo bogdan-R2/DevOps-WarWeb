@@ -3,11 +3,7 @@ const request = require('../models/Request');
 
 exports.getRequests = async (req, res, next) => {
   try {
-
-    const qry = {
-      requestType: "Request",
-    }
-    const requests = await request.find(qry);
+    const requests = await request.find();
 
     return res.status(200).json({
       success: true,

@@ -144,7 +144,7 @@ const setAsyncUserEmail = async () => {
           See all requests
      </button>
      </Link>
-     <Link to="/all-offers">
+     <Link to="/all-requests">
      <button type="button" className="btn btn-primary mr-2 ml-2">
           See all offers
      </button>

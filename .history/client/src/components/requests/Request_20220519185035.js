@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import {Grid, Item} from "@mui/material"
 
 import { useNavigate } from "react-router";
 
@@ -12,7 +11,7 @@ const Request = (props) => {
 
 return(
 <>
-<div className="card" style={{width:'22rem'}}>
+<Grid item xs={8}>
 
 <div className="card text-white bg-primary mb-3" >
   <div className="card-header">Header</div>
@@ -25,7 +24,7 @@ return(
 
   </div>
 </div>
-</div>
+</Grid>
 </>
     );
 };
