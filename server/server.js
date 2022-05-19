@@ -38,7 +38,7 @@ const db = mongoURI;
 console.log(db);
 // Connect to MongoDB
 mongoose
-  .connect(db, { useNewUrlParser: true })
+  .connect('mongodb://admin:admin@mongo:27017/pweb', { useNewUrlParser: true })
   .then(() => console.log("MongoDB successfully connected"))
   .catch(err => console.log(err));
 
