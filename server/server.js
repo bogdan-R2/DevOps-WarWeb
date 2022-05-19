@@ -38,7 +38,7 @@ const db = mongoURI;
 console.log(db);
 // Connect to MongoDB
 mongoose
-  .connect(db,{ useNewUrlParser: true })
+  .connect(db, { useNewUrlParser: true })
   .then(() => console.log("MongoDB successfully connected"))
   .catch(err => console.log(err));
 

@@ -1,67 +1,51 @@
-version: '3.9'
+version: '3'
 
 services:
-  # MongoDB service
-  mongo_db:
-    container_name: db_container
-    image: mongo:4.4.14
-    restart: always
-    volumes:
-      - ./mongo_db:/data/db
-
   # ExpressJS Api service
   api:
-    build: .
+    build: . # TODO: build: context: ./server
     ports:
-      - "5000:5000"
-    environment:
-      PORT: 5000
-      MONGODB_URI: mongodb://mongo_db:27017/pweb
-      DB_NAME: my_db
-      NAME: API_Config
+      - 5000:5000
+    container_name: pweb-api
+    networks:
+      - pweb-net
     depends_on:
-      - mongo_db
-      
-  proxy:
-      build:
-        context: .
-        dockerfile: Dockerfile.nginx
-      image: nginx_proxy:v1
-      ports:
-        - 80:80
-      depends_on:
-        - nodeapp
-      deploy:
-        placement:
-          constraints: [node.role == manager]
-      depends_on:
-        - api
-        
-  prometheus:
-    image: prom/prometheus:latest
-    container_name: prometheus
+      - mongo
+
+  # MongoDB service
+  mongo:
+    image: mongo:4.4.14
     ports:
-      - "9090:9090"
+      - 27017:27017
+    container_name: mongo
+    restart: always
+    environment:
+        MONGO_INITDB_ROOT_USERNAME: admin 
+        MONGO_INITDB_ROOT_PASSWORD: admin
+        MONGO_INITDB_DATABASE: pweb
+    networks:
+      - pweb-net
     volumes:
-      - /etc/prometheus:/etc/prometheus
-      - prometheus-data:/prometheus
-    restart: unless-stopped
-    command:
-      - "--config.file=/etc/prometheus/prometheus.yml"
+      - ./mongo_db:/data/db
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+
+
       
-  grafana:
-    image: grafana/grafana-oss:latest
-    container_name: grafana
-    ports:
-      - "3000:3000"
-    volumes:
-      - grafana-data:/var/lib/grafana
-    restart: unless-stopped
-      
-  
+  # proxy:
+  #   image: 'jc21/nginx-proxy-manager:latest'
+  #   ports:
+  #     - '80:80'
+  #     - '81:81'
+  #     - '443:443'
+  #   volumes:
+  #     - ./data:/data
+  #     - ./letsencrypt:/etc/letsencrypt
+  #   networks:
+  #     - pweb-net
+       
 volumes:
   mongo_db: {}
-  prometheus-data:
-    driver: local
-  grafana-data:
-    driver: local
+
+networks:
+  pweb-net:
+    driver: bridge
