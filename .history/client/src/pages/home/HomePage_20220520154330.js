@@ -11,9 +11,9 @@ import { useFetch } from '../../contexts/FetchContext';
 import axios from "axios";
 import { checkPropTypes } from "prop-types";
 import { propTypes } from "react-bootstrap/esm/Image";
-import { Card, Modal, Button } from "react-bootstrap";
+import { Card, Modal } from "react-bootstrap";
 import AddRequestForm from "../../components/requests/AddRequestForm";
-import { useCallback } from "react";
+
 
 const HomePage = (props) => {
     
@@ -25,42 +25,42 @@ const HomePage = (props) => {
     const emailValue = props.currUserEmail;
     const [showFormEnroll, setShowFormEnroll] = useState(false);
 
-    const handleShowFormEnroll = () => setShowFormEnroll(true);
   	const handleCloseFormEnroll = () => setShowFormEnroll(false);
 
-    const setAsyncUser = useCallback(async () => {
-      try {
-        //setUserEmail(getAuth().currentUser.email);
-        //setUserEmail(getAuth().currentUser.email);
-        setCurrentUser({value: {}, isFetching: true})
-        //const userEmailValue = getAuth().currentUser.email;
-        console.log("email value in fetch" + emailValue );   
-        const userValue = await axios.get(`http://127.0.0.1:5000/api/users/${emailValue}`);
 
-        if(!emailValue && userValue.data.data === null ) {
-              setCurrentUser({value: {}, isFetching: false}); 
-
-           }
-           else 
-           {
-              console.log("email value in else "+ emailValue );
-              console.log("email is " + emailValue)
-              if(userValue.data.data !== null)
-              {
-                  setCurrentUser({value: userValue.data.data, isFetching: false}); 
-              }
-           }
-           
-
-      } catch(error) {
-        setCurrentUser({value: {}, isFetching: false})
-        throw new Error(error);
-      }
-    
-    }, [props])
     useEffect (() => { 
+    const setAsyncUser = async () => {
+        try {
+          //setUserEmail(getAuth().currentUser.email);
+          //setUserEmail(getAuth().currentUser.email);
+          setCurrentUser({value: currentUser.value, isFetching: true})
+          //const userEmailValue = getAuth().currentUser.email;
+          console.log("email value in fetch" + emailValue );   
+          const userValue = await axios.get(`http://127.0.0.1:5000/api/users/${emailValue}`);
+
+          if(!emailValue && userValue.data.data === null ) {
+                setCurrentUser({value: {}, isFetching: false}); 
+
+             }
+             else 
+             {
+                console.log("email value in else "+ emailValue );
+                console.log("email is " + emailValue)
+                if(userValue.data.data !== null)
+                {
+                    setCurrentUser({value: userValue.data.data, isFetching: false}); 
+                }
+             }
+             
+  
+        } catch(error) {
+          setCurrentUser({value: {}, isFetching: false})
+          throw new Error(error);
+        }
+      
+      }
       setAsyncUser();
-  }, [setAsyncUser]);
+  }, []);
 
 
     return (
@@ -68,13 +68,8 @@ const HomePage = (props) => {
     {!currentUser.isFetching &&(
         <>
            <Header/>
-           <Card key={currentUser.value._id}>
-            <Card.Header>
-
-            <Button variant="primary" onClick={handleShowFormEnroll}>
-						Add Request/Offer {currentUser.value._id}
-					</Button>
-            </Card.Header>
+           <Card>
+            <Card.Header></Card.Header>
             <Card.Body>
                 <Modal
               show={showFormEnroll}
@@ -86,8 +81,7 @@ const HomePage = (props) => {
                   <Modal.Title>Add Request/Offer </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                  <AddRequestForm userData={currentUser.value} />
-
+                  <AddRequestForm userData={currentUser}/>
                 </Modal.Body>
               </Modal>
         

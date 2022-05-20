@@ -5,7 +5,7 @@ import {Grid} from "@mui/material"
 import { useFetch } from "../../contexts/FetchContext";
 import { getAuth } from "firebase/auth";
 import axios from 'axios';
-import Headbar from "../headbar/Headbar";
+
 const OfferList = () => {
 
     const [error, setError] = useState("");
@@ -37,7 +37,8 @@ return(
     <>
     {/*{!requestList.isFetching  && (*/}
     <Headbar>
-    </Headbar>
+
+</Headbar>
     <Grid container margin={5} padding={10} spacing={3}>
     {requestList.map(request => (
         <ul key={request._id}>

@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import { FetchProvider } from "./contexts/FetchContext";
 import HomePage from "./pages/home/HomePage";
@@ -19,34 +19,30 @@ const Routing = () => {
     
     const [userEmail, setUserEmail] = useState({value: {}, isFetching: false});
 
-
-    const setAsyncUserEmail = useCallback(() => {
-      try {
-        //setUserEmail(getAuth().currentUser.email);
-        //setUserEmail(getAuth().currentUser.email);
-        setUserEmail({value: userEmail.value, isFetching: true})
-        //const userEmailValue = getAuth().currentUser.email;
-        const userEmailValue = user.email;
-        if(!userEmail) {
-          setUserEmail({value: {}, isFetching: false})
-        } else if(userEmail!== null)
-         {
-         setUserEmail({value: userEmailValue, isFetching: false})
-        }
-
-      } catch(error) {
-        setUserEmail({value: {}, isFetching: false})
-        throw new Error(error);
-      }
-    
-    },[user, loading])
-
     useEffect (() => { 
         if(loading) return;
         //if(!user) Navigate("/");
+    const setAsyncUserEmail = () => {
+        try {
+          //setUserEmail(getAuth().currentUser.email);
+          //setUserEmail(getAuth().currentUser.email);
+          setUserEmail({value: userEmail.value, isFetching: true})
+          //const userEmailValue = getAuth().currentUser.email;
+          const userEmailValue = user.email;
+          if(!userEmail) {
+            setUserEmail({value: {}, isFetching: false})
+          }else 
+            setUserEmail({value: userEmailValue, isFetching: false})
+  
+        } catch(error) {
+          setUserEmail({value: {}, isFetching: false})
+          throw new Error(error);
+        }
+      
+      }
   
       setAsyncUserEmail();
-  }, [setAsyncUserEmail]);
+  }, [user, loading]);
 
     return (
         <>

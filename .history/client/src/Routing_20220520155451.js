@@ -29,17 +29,15 @@ const Routing = () => {
         const userEmailValue = user.email;
         if(!userEmail) {
           setUserEmail({value: {}, isFetching: false})
-        } else if(userEmail!== null)
-         {
-         setUserEmail({value: userEmailValue, isFetching: false})
+        }else if(userEmail !== null) {
+          setUserEmail({value: userEmailValue, isFetching: false})
         }
-
       } catch(error) {
         setUserEmail({value: {}, isFetching: false})
         throw new Error(error);
       }
     
-    },[user, loading])
+    },[])
 
     useEffect (() => { 
         if(loading) return;

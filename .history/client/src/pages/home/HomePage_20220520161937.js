@@ -68,11 +68,11 @@ const HomePage = (props) => {
     {!currentUser.isFetching &&(
         <>
            <Header/>
-           <Card key={currentUser.value._id}>
+           <Card>
             <Card.Header>
 
             <Button variant="primary" onClick={handleShowFormEnroll}>
-						Add Request/Offer {currentUser.value._id}
+						Add Course
 					</Button>
             </Card.Header>
             <Card.Body>
@@ -81,13 +81,13 @@ const HomePage = (props) => {
               onHide={handleCloseFormEnroll}
               backdrop="static"
               keyboard={false}
+              key={currentUser._id}
             >
                 <Modal.Header closeButton>
                   <Modal.Title>Add Request/Offer </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                  <AddRequestForm userData={currentUser.value} />
-
+                  <AddRequestForm userData={currentUser}/>
                 </Modal.Body>
               </Modal>
         

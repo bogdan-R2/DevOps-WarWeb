@@ -86,7 +86,7 @@ const HomePage = (props) => {
                   <Modal.Title>Add Request/Offer </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                  <AddRequestForm userData={currentUser.value} />
+                  <AddRequestForm userData={currentUser} />
 
                 </Modal.Body>
               </Modal>

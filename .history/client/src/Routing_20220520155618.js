@@ -39,7 +39,7 @@ const Routing = () => {
         throw new Error(error);
       }
     
-    },[user, loading])
+    },[])
 
     useEffect (() => { 
         if(loading) return;

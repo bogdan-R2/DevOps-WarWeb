@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import { FetchProvider } from "./contexts/FetchContext";
 import HomePage from "./pages/home/HomePage";
@@ -20,7 +20,7 @@ const Routing = () => {
     const [userEmail, setUserEmail] = useState({value: {}, isFetching: false});
 
 
-    const setAsyncUserEmail = useCallback(() => {
+    const setAsyncUserEmail = () => {
       try {
         //setUserEmail(getAuth().currentUser.email);
         //setUserEmail(getAuth().currentUser.email);
@@ -29,24 +29,22 @@ const Routing = () => {
         const userEmailValue = user.email;
         if(!userEmail) {
           setUserEmail({value: {}, isFetching: false})
-        } else if(userEmail!== null)
-         {
-         setUserEmail({value: userEmailValue, isFetching: false})
-        }
+        }else 
+          setUserEmail({value: userEmailValue, isFetching: false})
 
       } catch(error) {
         setUserEmail({value: {}, isFetching: false})
         throw new Error(error);
       }
     
-    },[user, loading])
+    }
 
     useEffect (() => { 
         if(loading) return;
         //if(!user) Navigate("/");
   
       setAsyncUserEmail();
-  }, [setAsyncUserEmail]);
+  }, [user, loading]);
 
     return (
         <>

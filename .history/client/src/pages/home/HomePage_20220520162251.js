@@ -68,11 +68,11 @@ const HomePage = (props) => {
     {!currentUser.isFetching &&(
         <>
            <Header/>
-           <Card key={currentUser.value._id}>
+           <Card>
             <Card.Header>
 
             <Button variant="primary" onClick={handleShowFormEnroll}>
-						Add Request/Offer {currentUser.value._id}
+						Add Course
 					</Button>
             </Card.Header>
             <Card.Body>
@@ -86,7 +86,9 @@ const HomePage = (props) => {
                   <Modal.Title>Add Request/Offer </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                  <AddRequestForm userData={currentUser.value} />
+                  <React.Fragment key={{currentUser._id}}
+                  <AddRequestForm userData={currentUser} />
+                  </React.Fragment>
 
                 </Modal.Body>
               </Modal>

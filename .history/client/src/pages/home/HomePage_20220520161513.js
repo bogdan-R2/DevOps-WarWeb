@@ -11,7 +11,7 @@ import { useFetch } from '../../contexts/FetchContext';
 import axios from "axios";
 import { checkPropTypes } from "prop-types";
 import { propTypes } from "react-bootstrap/esm/Image";
-import { Card, Modal, Button } from "react-bootstrap";
+import { Card, Modal } from "react-bootstrap";
 import AddRequestForm from "../../components/requests/AddRequestForm";
 import { useCallback } from "react";
 
@@ -26,6 +26,7 @@ const HomePage = (props) => {
     const [showFormEnroll, setShowFormEnroll] = useState(false);
 
     const handleShowFormEnroll = () => setShowFormEnroll(true);
+
   	const handleCloseFormEnroll = () => setShowFormEnroll(false);
 
     const setAsyncUser = useCallback(async () => {
@@ -68,11 +69,11 @@ const HomePage = (props) => {
     {!currentUser.isFetching &&(
         <>
            <Header/>
-           <Card key={currentUser.value._id}>
+           <Card>
             <Card.Header>
 
-            <Button variant="primary" onClick={handleShowFormEnroll}>
-						Add Request/Offer {currentUser.value._id}
+            <Button variant="primary" onClick={handleShowFormAdd}>
+						Add Course
 					</Button>
             </Card.Header>
             <Card.Body>
@@ -86,8 +87,7 @@ const HomePage = (props) => {
                   <Modal.Title>Add Request/Offer </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                  <AddRequestForm userData={currentUser.value} />
-
+                  <AddRequestForm userData={currentUser}/>
                 </Modal.Body>
               </Modal>
         

@@ -140,7 +140,6 @@ const setAsyncUserEmail = async () => {
           height="30"
           className="d-inline-block align-top"
         />{' '}
-        WarWeb
         {currentUser.value._id}
       </Navbar.Brand>
       <Link to="/all-requests">
