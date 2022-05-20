@@ -1,3 +1,7 @@
-server/node_modules
-client/node_modules
-client/mongo_db
+./server/node_modules
+./client/node_modules
+./server/mongo_db
+./server/mongo_db/*
+./server/portainer_data
+./server/data
+./server/letsencrypt
