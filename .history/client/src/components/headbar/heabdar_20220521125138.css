@@ -1,0 +1,21 @@
+.container-fluid {
+    width: 100%;
+}
+
+.navbar{
+    position: relative;
+    width: 100vw!important;
+}
+
+.nav {
+    width: 100% !important;
+}
+
+#navbarScrollingDropdown {
+    color: black;
+}
+
+
+#nav-bar-categories {
+    color: black;
+}
