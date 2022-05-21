@@ -42,7 +42,7 @@ async function handleLogout() {
           <Nav.Link href="#pricing">Pricing</Nav.Link>
         </Nav>
         <Navbar.Collapse className="justify-content-end">
-          <NavDropdown
+          <NavDropdown style={{color: "black"}}
             title={userData.email}
             id="navbarScrollingDropdown"
           >

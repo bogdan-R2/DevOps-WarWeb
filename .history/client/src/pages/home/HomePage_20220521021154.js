@@ -1,4 +1,6 @@
 import React from "react";
+import Headbar from "../../components/headbar/Headbar";
+import Sidemenu from "../../components/sidemenu/Sidemenu";
 import Header from "../../components/header/Header";
 //import { useFetch } from "../../contexts/FetchContext";
 import { useState, useEffect } from "react";

@@ -52,8 +52,8 @@ return(
     {/*{!requestList.isFetching  && (*/}
     {requestList &&  userData && (
         <>   
-    <Headbar userData={userData}/>   
     <div style={{ padding: 20 }}>
+    <Headbar></Headbar>
     <Grid container margin={5} padding={10} spacing={5}>
     {requestList.map(request => (
         <ul key={request._id}>

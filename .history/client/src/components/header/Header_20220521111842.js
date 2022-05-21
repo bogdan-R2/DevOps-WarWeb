@@ -44,7 +44,7 @@ const Header = ({userData}) => {
     }, function(error) {
       // An error happened.
       console.log(error);
-      setErrorMessage("Failed to log out.");
+      setError("Failed to log out.");
     });
   }
 

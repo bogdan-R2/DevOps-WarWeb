@@ -31,11 +31,10 @@ const Routing = () => {
           if(currUser) {
             setUserEmail({value: userEmail.value, isFetching: true})
             //const userEmailValue = getAuth().currentUser.email;
-            //const userEmailValue = user.email;
-            const userEmailValue = currUser.email;
+            const userEmailValue = user.email;
             if(!userEmail) {
               setUserEmail({value: {}, isFetching: false})
-            } else if(userEmailValue !== undefined)
+            } else if(userEmail!== undefined)
              {
              setUserEmail({value: userEmailValue, isFetching: false})
              

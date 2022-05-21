@@ -27,21 +27,17 @@ const Routing = () => {
       try {
         //setUserEmail(getAuth().currentUser.email);
         //setUserEmail(getAuth().currentUser.email);
-        auth.onAuthStateChanged(function(currUser){
-          if(currUser) {
-            setUserEmail({value: userEmail.value, isFetching: true})
-            //const userEmailValue = getAuth().currentUser.email;
-            //const userEmailValue = user.email;
-            const userEmailValue = currUser.email;
-            if(!userEmail) {
-              setUserEmail({value: {}, isFetching: false})
-            } else if(userEmailValue !== undefined)
-             {
-             setUserEmail({value: userEmailValue, isFetching: false})
-             
-            }
+        auth.onAuthStateChanged(function(){
+          setUserEmail({value: userEmail.value, isFetching: true})
+          //const userEmailValue = getAuth().currentUser.email;
+          const userEmailValue = user.email;
+          if(!userEmail) {
+            setUserEmail({value: {}, isFetching: false})
+          } else if(userEmail!== undefined)
+           {
+           setUserEmail({value: userEmailValue, isFetching: false})
+           
           }
-          
         })
 
         /*

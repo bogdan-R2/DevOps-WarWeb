@@ -1,13 +1,13 @@
 import React,  {useState} from "react";
-import {Container, Navbar, Nav, NavDropdown} from 'react-bootstrap'
+import {Container, Navbar, Nav} from 'react-bootstrap'
 import logo from '../../assets/img/dove.svg';
 import { useNavigate } from "react-router";
 import { getAuth } from "firebase/auth";
 import './heabdar.css'
 import { Button } from "@mui/material";
-import LogoutIcon from '@mui/icons-material/Logout';
+import LogoutIcon from '@mui/icons-material/Logout'
 
-const Headbar = ({userData}) => {
+const Headbar = () => {
 
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -40,17 +40,8 @@ async function handleLogout() {
           <Nav.Link href="/home">Home</Nav.Link>
           <Nav.Link href="#features">Features</Nav.Link>
           <Nav.Link href="#pricing">Pricing</Nav.Link>
+          <Button onClick={handleLogout}> Logout</Button>
         </Nav>
-        <Navbar.Collapse className="justify-content-end">
-          <NavDropdown
-            title={userData.email}
-            id="navbarScrollingDropdown"
-          >
-            <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item onClick={handleLogout}>Log Out</NavDropdown.Item>
-          </NavDropdown>
-          </Navbar.Collapse>
       </Navbar>
 
       </>

@@ -52,7 +52,7 @@ return(
     {/*{!requestList.isFetching  && (*/}
     {requestList &&  userData && (
         <>   
-    <Headbar userData={userData}/>   
+    <Headbar/>   
     <div style={{ padding: 20 }}>
     <Grid container margin={5} padding={10} spacing={5}>
     {requestList.map(request => (

@@ -1,5 +1,5 @@
 import React,  {useState} from "react";
-import {Container, Navbar, Nav, NavDropdown} from 'react-bootstrap'
+import {Container, Navbar, Nav} from 'react-bootstrap'
 import logo from '../../assets/img/dove.svg';
 import { useNavigate } from "react-router";
 import { getAuth } from "firebase/auth";
@@ -7,7 +7,7 @@ import './heabdar.css'
 import { Button } from "@mui/material";
 import LogoutIcon from '@mui/icons-material/Logout';
 
-const Headbar = ({userData}) => {
+const Headbar = () => {
 
   const [error, setError] = useState("");
   const navigate = useNavigate();

@@ -9,10 +9,6 @@ import { auth } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import logo from '../../assets/img/dove.svg';
 import axios from "axios";
-import { useNavigate } from "react-router";
-
-
-
 
 const customStyles = {
   content: {
@@ -32,7 +28,6 @@ const Header = ({userData}) => {
   const [currentUser, setCurrentUser] = useState({value: {}, isFetching: false});
   const [user, loading, error] = useAuthState(auth);
   const [errorMessage, setErrorMessage] = useState("");
-  const navigate = useNavigate();
 
 
   async function handleLogout() {
@@ -44,7 +39,7 @@ const Header = ({userData}) => {
     }, function(error) {
       // An error happened.
       console.log(error);
-      setErrorMessage("Failed to log out.");
+      setError("Failed to log out.");
     });
   }
 

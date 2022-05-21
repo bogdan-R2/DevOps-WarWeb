@@ -27,35 +27,16 @@ const Routing = () => {
       try {
         //setUserEmail(getAuth().currentUser.email);
         //setUserEmail(getAuth().currentUser.email);
-        auth.onAuthStateChanged(function(currUser){
-          if(currUser) {
-            setUserEmail({value: userEmail.value, isFetching: true})
-            //const userEmailValue = getAuth().currentUser.email;
-            //const userEmailValue = user.email;
-            const userEmailValue = currUser.email;
-            if(!userEmail) {
-              setUserEmail({value: {}, isFetching: false})
-            } else if(userEmailValue !== undefined)
-             {
-             setUserEmail({value: userEmailValue, isFetching: false})
-             
-            }
-          }
-          
-        })
-
-        /*
         setUserEmail({value: userEmail.value, isFetching: true})
         //const userEmailValue = getAuth().currentUser.email;
         const userEmailValue = user.email;
         if(!userEmail) {
           setUserEmail({value: {}, isFetching: false})
-        } else if(userEmail!== undefined)
+        } else if(userEmail!== null)
          {
          setUserEmail({value: userEmailValue, isFetching: false})
          
         }
-        */
 
       } catch(error) {
         setUserEmail({value: {}, isFetching: false})
@@ -68,7 +49,7 @@ const Routing = () => {
       if(loading) return;
       setTimeout(() => {
         setAsyncUserEmail();
-      }, 1000);
+      }, 3000);
   }, [setAsyncUserEmail]);
 // add timeout unde face use effect figuri
     return (
