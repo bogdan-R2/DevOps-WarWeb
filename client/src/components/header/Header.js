@@ -3,7 +3,16 @@ import "./HeaderStyling.css";
 import Modal from "react-modal";
 import { useEffect, useState } from "react";
 import { getAuth} from "firebase/auth";
-import {Navbar, Container, Button} from 'react-bootstrap'
+import {Navbar, Container, Button, NavDropdown} from 'react-bootstrap'
+import { Link, Navigate } from "react-router-dom";
+import { auth } from "../../firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import logo from '../../assets/img/dove.svg';
+import axios from "axios";
+import { useNavigate } from "react-router";
+
+
+
 
 const customStyles = {
   content: {
@@ -16,48 +25,72 @@ const customStyles = {
   },
 };
 
-const Header = () => {
-  let subtitle;
+const Header = ({userData}) => {
+
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [userEmail, setUserEmail] = useState({})
+  const [userEmail, setUserEmail] = useState({value: {}, isFetching: false});
+  const [currentUser, setCurrentUser] = useState({value: {}, isFetching: false});
+  const [user, loading, error] = useAuthState(auth);
+  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
+
+
+  async function handleLogout() {
+    setErrorMessage("");
   
-  useEffect (() => { 
-    setUserEmail(getAuth().currentUser.email)
-    console.log(userEmail)
-}, {})
-  
-
-  function openModal() {
-    setIsOpen(true);
+    await auth.signOut().then(function() {
+      // Sign-out successful.
+      navigate("/");
+    }, function(error) {
+      // An error happened.
+      console.log(error);
+      setErrorMessage("Failed to log out.");
+    });
   }
 
-  function afterOpenModal() {
-    subtitle.style.color = "#f00";
-  }
 
-  function closeModal() {
-    setIsOpen(false);
-  }
 
   return(
 <>
-  <Navbar bg="dark" variant="dark">
-    <Container>
-      <Navbar.Brand href="#home">
+ {/*{ userEmail.value && (*/}
+  <Navbar bg="dark"  style={customStyles}>
+      <Navbar.Brand href="/home">
         <img
           alt=""
-          src="/logo.svg"
+          src = { logo }
           width="30"
           height="30"
           className="d-inline-block align-top"
         />{' '}
         WarWeb
+        {currentUser.value._id}
       </Navbar.Brand>
-    </Container>
+      <Link to="/all-requests">
+     <Button type="button" className="btn btn-primary ml-2 mr-2">
+          See all requests
+     </Button>
+     </Link>
+
+     <Link to="/all-offers">
+     <button type="button" className="btn btn-primary ml-2 mr-2 ">
+          See all offers
+     </button>
+     </Link>
+    <Navbar.Toggle />
+
+        <Navbar.Collapse className="justify-content-end">
+          <NavDropdown
+            title={userData.email}
+            id="navbarScrollingDropdown"
+          >
+            <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item onClick={handleLogout}>Log Out</NavDropdown.Item>
+          </NavDropdown>
+          </Navbar.Collapse>
+
   </Navbar>
-  <button type="button"
-  class="btn btn-primary"
-  >{userEmail}</button>
+{/*)}*/}
 
 </>
     );

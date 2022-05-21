@@ -1,9 +1,13 @@
-const request = require('../models/request.js');
+const request = require('../models/Request');
 
 
 exports.getRequests = async (req, res, next) => {
   try {
-    const requests = await request.find();
+
+    const qry = {
+      requestType: "Request",
+    }
+    const requests = await request.find(qry);
 
     return res.status(200).json({
       success: true,
@@ -16,6 +20,45 @@ exports.getRequests = async (req, res, next) => {
   }
 };
 
+
+exports.getOffers = async (req, res, next) => {
+  try {
+    const qry = {
+      requestType: "Offer",
+    }
+    const requests = await request.find(qry);
+
+    return res.status(200).json({
+      success: true,
+      count: requests.length,
+      data: requests
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
+
+exports.getRequestsById = async (req, res, next) => {
+  try {
+    const qry = {
+      postedBy: req.params._id,
+    }
+    const requests = await request.find(qry);
+
+    return res.status(200).json({
+      success: true,
+      count: requests.length,
+      data: requests
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
+
 exports.addRequest = async (req, res, next) => {
   try {
     await request.create(req.body)
@@ -25,10 +68,10 @@ exports.addRequest = async (req, res, next) => {
         message: "request added succesfully"
       });
     })
-    .catch(() => {
+    .catch((error) => {
         res.status(400).send({
             status: false,
-            message:"Error adding request",
+            message:error.message,
         });
     });
   } catch (err) {

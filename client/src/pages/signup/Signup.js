@@ -43,7 +43,7 @@ const Signup = () => {
         console.log('ajunge in post')
         axios({
         method: 'post',
-        url: 'http://127.0.0.1:5000/api/user',
+        url: 'http://127.0.0.1:5000/api/users',
         data: {
             email: email, 
             fullName: fullName,
@@ -61,72 +61,6 @@ const Signup = () => {
         setErrorMessage("");
         createUserWithEmailAndPassword(auth, email, password);
         postUser();
-
-        /*
-
-        try {
-          getExistingUser();
-          if(user != null) {
-            console.log("ahunge aici ???")
-            console.log("user exists")
-          }
-          else {
-            createUserWithEmailAndPassword(auth, email, password)
-            postUser();
-
-          }
-      } catch (error) {
-        console.log(error);
-      }*/
-
-/*
-        getAuth()
-        .getUserByEmail(email)
-        .then((userRecord) => {
-          // See the UserRecord reference doc for the contents of userRecord.
-          console.log(`Successfully fetched user data: ${userRecord.toJSON()}`);
-        })
-        .catch((error) => {
-          console.log('Error fetching user data:', error);
-        });
-            
-        setUser(getAuth().getUserByEmail(email));
-        console.log(user.email)   
-        createUserWithEmailAndPassword(auth, email, password)
-       .then (() => {
-        axios({
-            method: 'post',
-            url: 'http://127.0.0.1:5000/api/user',
-            data: {
-                email: email, 
-                fullName: fullName,
-                city: city,
-                country: country
-         }
-        }).then(function (response) {
-                    console.log(response);
-                    console.log('ajungem in post?');
-                    navigate("/home");
-                  }, (error) => {
-                      setError(error);
-                    throw new Error(error);
-                  })
-        .catch((err) => {
-            if (err.response) {
-                console.log(error.response.data.message);
-                throw new Error(err);
-            }
-        }).catch((error) => {
-            if (error.response) {
-                console.log(error.response.data.message);
-                throw new Error(error);
-            }
-        }) 
-       }).((catch(error) => {
-           console.log(error.message)
-          setError(error.message)
-          throw new Error(error);
-       });*/
                  
     }
 

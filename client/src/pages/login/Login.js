@@ -25,6 +25,7 @@ const Login = () => {
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
+      e.preventDefault();
         console.log("sending");
         console.log(email);
         console.log(password);

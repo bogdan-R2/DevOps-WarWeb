@@ -1,16 +1,21 @@
 version: '3'
 
 services:
-  # ExpressJS Api service
-  front:
+  # React web app service
+  pweb-front:
+    container_name: pweb-front
     build: ./client # TODO: build: context: ./client
     ports:
       - 3006:3006
-    container_name: pweb-front
+    depends_on:
+      - pweb-api
+    links:
+      - pweb-api
     networks:
       - pweb-net
 
-  api:
+  # ExpressJS API service
+  pweb-api:
     build: ./server # TODO: build: context: ./server
     ports:
       - 5000:5000
@@ -19,6 +24,8 @@ services:
       - pweb-net
       - monitoring
     depends_on:
+      - mongo
+    links:
       - mongo
 
   # MongoDB service
@@ -35,21 +42,44 @@ services:
     volumes:
       - ./server/mongo_db:/data/db
       - ./server/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    deploy:
+      mode: global
+      placement:
+        constraints: [node.role == manager]
 
+  # Nginx revese proxy service 
   proxy:
-    image: 'jc21/nginx-proxy-manager:latest'
+    # image: 'jc21/nginx-proxy-manager:latest'
+    # ports:
+    #   - '80:80'
+    #   - '81:81'
+    #   - '443:443'
+    # environment:
+    #     MONGO_INITDB_DATABASE: pweb
+    # volumes:
+    #   - ./server/data:/data
+    #   - ./server/letsencrypt:/etc/letsencrypt
+    # networks:
+    #   - pweb-net
     ports:
-      - '80:80'
-      - '81:81'
-      - '443:443'
-    environment:
-        MONGO_INITDB_DATABASE: pweb
+      - 3050:80
+    restart: always
+    build: ./server/nginx
     volumes:
       - ./server/data:/data
-      - ./server/letsencrypt:/etc/letsencrypt
+      - /server/letsencrypt:/etc/letsencrypt
+    environment:
+      MONGO_INITDB_DATABASE: pweb
     networks:
       - pweb-net
-      
+    depends_on:
+      - pweb-front
+      - pweb-api
+      - mongo
+      - portainer
+      - grafana
+
+  # Poratiner service
   portainer:
     image: portainer/portainer-ce:latest
     container_name: portainer
@@ -62,7 +92,13 @@ services:
       - ./server/portainer-data:/data
     ports:
       - 9000:9000
-      
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+  
+  # Prometheus service
   prometheus:
     image: prom/prometheus:v2.20.1
     container_name: prometheus
@@ -76,6 +112,7 @@ services:
     networks:
       - monitoring
 
+  # Grafana service
   grafana:
     image: grafana/grafana:7.1.5
     container_name: grafana
@@ -92,7 +129,11 @@ services:
       - 3000
     networks:
       - monitoring
+    deploy:
+      placement:
+        constraints: [node.role == manager]
 
+  # Node exporter service
   node_exporter:
       image: prom/node-exporter
       deploy:
@@ -118,6 +159,8 @@ volumes:
 
 networks:
   pweb-net:
+    name: pweb-net
     driver: bridge
   monitoring:
+    name: monitoring
     driver: bridge

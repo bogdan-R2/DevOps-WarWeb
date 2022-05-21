@@ -12,24 +12,19 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "-": "^0.0.1",
     "axios": "^0.27.2",
     "body-parser": "^1.20.0",
     "cors": "^2.8.5",
-    "db": "^3.3.1",
-    "dotenv": "^16.0.1",
+    "dotenv": "^16.0.0",
     "express": "^4.18.1",
-    "logger": "^0.0.1",
     "material-design-icons-iconfont": "^6.7.0",
-    "mongo": "^0.1.0",
-    "mongoose": "^6.3.3",
+    "mongoose": "^6.3.2",
     "morgan": "^1.10.0",
-    "node-geocoder": "^4.0.0",
-    "request": "^2.88.2"
+    "node-geocoder": "^4.0.0"
   },
   "devDependencies": {
     "eslint": "^8.15.0",
     "nodemon": "^2.0.16",
-    "webpack": "^5.72.1"
+    "webpack": "^5.72.0"
   }
 }

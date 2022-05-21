@@ -10,3 +10,5 @@ npm install @mui/material @emotion/react @emotion/styled
 npm install firebase
 npm install react-bootstrap
 npm install react-modall
+npm install @mui/material @emotion/react @emotion/styled
+npm install react-loading

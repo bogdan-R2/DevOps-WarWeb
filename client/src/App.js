@@ -1,6 +1,6 @@
 import './App.css';
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { ThemeProvider } from "styled-components";
 import Routing from "./Routing";
@@ -8,14 +8,52 @@ import { GlobalStyle } from "./styles/globalStyle";
 import { darkTheme, lightTheme } from "./styles/theme";
 import HomePage from './pages/home/HomePage';
 import { Header } from './components/header/Header';
+import { FetchProvider } from './contexts/FetchContext';
+import { auth } from "./firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { Link, Navigate } from "react-router-dom";
+import userEmail from './global/GlobalUserMail';
 
 export const ThemeContext = React.createContext(null);
 
 const App = () => {
     const [theme, setTheme] = useState("light");
     const themeStyle = theme === "light" ? lightTheme : darkTheme;
+   /*
+    const [user, loading, error] = useAuthState(auth);
+    
+    const [userEmail, setUserEmail] = useState({value: {}, isFetching: false});
 
+
+
+    useEffect (() => { 
+        if(loading) return;
+        if(!user) return Navigate("/");
+    const setAsyncUserEmail = async () => {
+        try {
+          //setUserEmail(getAuth().currentUser.email);
+          //setUserEmail(getAuth().currentUser.email);
+          setUserEmail({value: userEmail.value, isFetching: true})
+          //const userEmailValue = getAuth().currentUser.email;
+          const userEmailValue = user.email;
+          if(!userEmail) {
+            setUserEmail({value: {}, isFetching: false})
+          }else 
+            setUserEmail({value: userEmailValue, isFetching: false})
+  
+        } catch(error) {
+          setUserEmail({value: {}, isFetching: false})
+          throw new Error(error);
+        }
+      
+      }
+  
+      setAsyncUserEmail();
+  }, [user, loading]);
+   */
     return (
+        <>
+         
         <ThemeContext.Provider value={{ setTheme, theme }}>
             <ThemeProvider theme={themeStyle}>
                 <GlobalStyle />
@@ -29,11 +67,11 @@ const App = () => {
                     />
                 </Helmet>
                 <Routing/>
-
-
             </ThemeProvider>
         </ThemeContext.Provider>
-    );
+       
+     </>
+     );
 };
 
 export default App;
