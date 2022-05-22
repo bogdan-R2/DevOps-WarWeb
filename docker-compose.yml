@@ -1,9 +1,9 @@
-version: '3'
+version: '3.8'
 
 services:
   # React web app service
   pweb-front:
-    container_name: pweb-front
+    image: gitlab.cs.pub.ro:5050/bogdan_andrei.buga/war-help/client
     build: ./client # TODO: build: context: ./client
     ports:
       - 3006:3006
@@ -16,10 +16,10 @@ services:
 
   # ExpressJS API service
   pweb-api:
+    image: gitlab.cs.pub.ro:5050/bogdan_andrei.buga/war-help/server
     build: ./server # TODO: build: context: ./server
     ports:
-      - 5000:5000
-    container_name: pweb-api
+      - 8091:8091
     networks:
       - pweb-net
       - monitoring
@@ -33,7 +33,6 @@ services:
     image: mongo:4.4.14
     ports:
       - 27017:27017
-    container_name: mongo
     restart: always
     environment:
         MONGO_INITDB_DATABASE: pweb
@@ -49,18 +48,7 @@ services:
 
   # Nginx revese proxy service 
   proxy:
-    # image: 'jc21/nginx-proxy-manager:latest'
-    # ports:
-    #   - '80:80'
-    #   - '81:81'
-    #   - '443:443'
-    # environment:
-    #     MONGO_INITDB_DATABASE: pweb
-    # volumes:
-    #   - ./server/data:/data
-    #   - ./server/letsencrypt:/etc/letsencrypt
-    # networks:
-    #   - pweb-net
+    image: proxy
     ports:
       - 3050:80
     restart: always
@@ -78,11 +66,14 @@ services:
       - mongo
       - portainer
       - grafana
+    deploy:
+      mode: global
+      placement:
+        constraints: [node.role == manager]
 
   # Poratiner service
   portainer:
     image: portainer/portainer-ce:latest
-    container_name: portainer
     restart: unless-stopped
     security_opt:
       - no-new-privileges:true
@@ -90,6 +81,8 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./server/portainer-data:/data
+    networks:
+      - pweb-net
     ports:
       - 9000:9000
     deploy:
@@ -101,21 +94,17 @@ services:
   # Prometheus service
   prometheus:
     image: prom/prometheus:v2.20.1
-    container_name: prometheus
     volumes:
       - ./server/prometheus:/etc/prometheus
       - prometheus_data:/prometheus
     ports:
       - 9090:9090
-    expose:
-      - 9090
     networks:
       - monitoring
 
   # Grafana service
   grafana:
     image: grafana/grafana:7.1.5
-    container_name: grafana
     volumes:
       - grafana_data:/var/lib/grafana
       - ./server/grafana/provisioning:/etc/grafana/provisioning
@@ -125,8 +114,6 @@ services:
       - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
     ports:
       - 3000:3000
-    expose:
-      - 3000
     networks:
       - monitoring
     deploy:
@@ -154,7 +141,6 @@ services:
 
   rabbitmq:
       image: rabbitmq:3-management
-      container_name: rabbitmq
       ports:
           - 5672:5672
           - 15672:15672
@@ -167,7 +153,5 @@ volumes:
 networks:
   pweb-net:
     name: pweb-net
-    driver: bridge
   monitoring:
     name: monitoring
-    driver: bridge

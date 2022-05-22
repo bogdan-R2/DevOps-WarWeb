@@ -2,12 +2,12 @@ FROM node:12
 
 WORKDIR /usr/src/app
 
-COPY ./package*.json .
+COPY ./package*.json ./
 
 RUN npm install
 
-COPY . .
+COPY ./ ./
 
-EXPOSE 8080
+EXPOSE 8091
 
 CMD ["node", "/usr/src/app/server.js"]

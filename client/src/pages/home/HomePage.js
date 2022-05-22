@@ -34,7 +34,7 @@ const HomePage = (props) => {
         //const userEmailValue = getAuth().currentUser.email;
         console.log("email value in fetch" + emailValue );   
         console.log(API);
-        const userValue = await axios.get(`${API}:5000/api/users/${emailValue}`);
+        const userValue = await axios.get(`${API}:5005/api/users/${emailValue}`);
 
         if(!emailValue && userValue.data.data === null ) {
               setCurrentUser({value: {}, isFetching: true}); 

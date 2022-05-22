@@ -26,7 +26,7 @@ const Profile = (props) => {
         setCurrentUser({value: {}, isFetching: true})
         //const userEmailValue = getAuth().currentUser.email;
         console.log("email value in fetch" + emailValue );   
-        const userValue = await axios.get(`http://pweb-api:5000/api/users/${emailValue}`);
+        const userValue = await axios.get(`http://pweb-api:8091/api/users/${emailValue}`);
 
         if(!emailValue && userValue.data.data === null ) {
               setCurrentUser({value: {}, isFetching: true}); 

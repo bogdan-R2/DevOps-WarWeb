@@ -19,7 +19,7 @@ useEffect(() => {
 
 const getUsersRequests = () => {
   if(userData._id !== undefined) {
-  axios.get(`http://pweb-api:5000/api/request/${userData._id}`)
+  axios.get(`http://pweb-api:8091/api/request/${userData._id}`)
   .then((response) => {
       const allRequests = response.data.data;
       setRequestList(allRequests);

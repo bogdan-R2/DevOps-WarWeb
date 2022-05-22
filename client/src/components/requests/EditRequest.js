@@ -59,7 +59,7 @@ const EditRequest = ({ requestData }) => {
           
         axios({
         method: 'put',
-        url: 'http://pweb-api:5000/api/request/update',
+        url: 'http://pweb-api:8091/api/request/update',
         data: request
   })}}
     catch (error) {

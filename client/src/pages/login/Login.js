@@ -8,9 +8,9 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import LandingNav from '../../components/landing-page-nav/LandingNav';
 
 
-// http://pweb-api:5000"
+// http://pweb-api:8091"
 const API = process.env.REACT_APP_API;
-//const API = "http://pweb-api:5000"
+//const API = "http://pweb-api:8091"
 const Login = () => {
 
     const [fullName, setFullName] = useState('');

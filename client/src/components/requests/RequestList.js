@@ -88,7 +88,7 @@ const getAllRequests = async () => {
     ///request/by-category/:category
 
     if(selectedCategory === 'All Requests' || selectedCategory === 'Category') {
-        await axios.get(`http://pweb-api:5000/api/request`)
+        await axios.get(`http://pweb-api:8091/api/request`)
         .then((response) => {
             const allRequests = response.data.data;
             setLoading(true);
@@ -100,7 +100,7 @@ const getAllRequests = async () => {
             setLoading(true);
         });
     } else {
-        await axios.get(`http://pweb-api:5000/api/request/by-category/${selectedCategory}`)
+        await axios.get(`http://pweb-api:8091/api/request/by-category/${selectedCategory}`)
         .then((response) => {
             const allRequests = response.data.data;
             setLoading(true);
@@ -117,7 +117,7 @@ const getAllRequests = async () => {
 
 const getCurrentUser = async () => {
     if(props.currUserEmail !== undefined) {
-    await axios.get(`http://pweb-api:5000/api/users/${props.currUserEmail}`)
+    await axios.get(`http://pweb-api:8091/api/users/${props.currUserEmail}`)
     .then((response) => {
         const allRequests = response.data.data;
         setLoading(true);
