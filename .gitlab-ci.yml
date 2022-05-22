@@ -1,0 +1,26 @@
+stages:
+    - build
+    - deploy
+
+build:
+    stage: build
+    image: docker:latest
+    services:
+        - docker:dind
+    before_script:
+        - echo "BUILDING..."
+    script:
+        - docker swarm init
+        - docker compose build
+        - docker compose push
+        - docker service create --name registry --publish published=5000,target=5000 registry:2
+
+deploy:
+    stage: deploy
+    image: docker:latest
+    services:
+        - docker:dind
+    before_script:
+        - echo "DEPLOYING..."
+    script:
+        - docker stack deploy --compose-file docker-compose.yml warhelp-stack
