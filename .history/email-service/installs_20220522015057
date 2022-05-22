@@ -1,0 +1,2 @@
+npm install –-save amqplib
+npm i express

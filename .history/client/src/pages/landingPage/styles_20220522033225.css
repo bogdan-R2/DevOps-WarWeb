@@ -1,0 +1,81 @@
+section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    
+}
+
+.contentWrapper {
+    width: 85%;
+    height: 655px;
+    display: flex;;
+    align-items: center;
+    justify-content: space-between;
+    flex-flow: row wrap;
+}
+
+.leftContent {
+    width: 55%;
+    height: 60%;
+    display: block;
+    flex-flow: column;
+    justify-content: space-between;
+    padding-block-start: 2px;
+    text-indent: 0px;
+    padding: auto;
+    color: black;
+}
+
+.leftContent input {
+    border:.6px solid rgba(0, 0, 0, 0.637);
+    height: 50px;
+    width: 100%;
+    border-radius: 10px;
+    
+    color: black
+}
+
+.handle {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 200px;
+  height: 200px;
+}
+
+.leftContent button {
+    width: 250px;
+    height: 50px;
+    border-radius: 10px;
+    margin-top: 10px;
+    
+}
+
+.leftContent h2 {
+    color: rgb(3, 3, 82);
+    font-size: 2rem;
+    line-height: 1.5em;
+    width: 70%;
+}
+
+
+.rigthContent img {
+    /* Set rules to fill background */
+    min-width: 60%;
+        
+    /* Set up proportionate scaling */
+    width: 60%;
+    margin-left: auto;
+    margin-top: 95px;
+    margin-right: 100px;
+        
+    /* Set up positioning */
+    position: absolute;
+    top: 0;
+    right: 20%;
+    left: 100px;
+    z-index: -1;
+
+}
+
