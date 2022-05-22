@@ -10,7 +10,6 @@ import { useAuth } from '../../contexts/AuthContext';
 import { Link, useNavigate } from "react-router-dom";
 
 import './Signup.css'
-import LandingNav from '../../components/landing-page-nav/LandingNav';
 
 const API = process.env.REACT_APP_API;
 
@@ -73,7 +72,6 @@ const Signup = () => {
 
 return (
   <>
-  <LandingNav/>
     <div className="w-100" style={{ maxWidth: "400px" }}>
 
     <form className="signupform" onSubmit={handleSubmit}>

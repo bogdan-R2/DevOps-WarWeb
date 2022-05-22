@@ -16,7 +16,7 @@ const LandingPage = () => {
       <div className="contentWrapper">
         <div className="leftContent">
         <h2>Do you want to help or need help?</h2>
-        <button type="button" className="btn btn-info btn-lg " onClick={handleClick}>Register Now</button>
+        <button type="button" className="btn btn-primary btn-lg " onClick={handleClick}>Register Now</button>
         </div>
         <div className="rigthContent">
           <div className="heroImg">

@@ -18,13 +18,13 @@ const LandingNav = () => {
         </NavLink>
         <Bars />
         <NavMenu>
-          <NavLink to='/about' activestyle="true">
+          <NavLink to='/about' activeStyle>
             About
           </NavLink>
-          <NavLink to='/contact-us' activestyle="true">
+          <NavLink to='/contact-us' activeStyle>
             Contact Us
           </NavLink>
-          <NavLink to='/signup' activestyle="true">
+          <NavLink to='/signup' activeStyle>
             Sign Up
           </NavLink>
         </NavMenu>

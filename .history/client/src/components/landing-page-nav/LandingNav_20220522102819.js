@@ -21,10 +21,10 @@ const LandingNav = () => {
           <NavLink to='/about' activestyle="true">
             About
           </NavLink>
-          <NavLink to='/contact-us' activestyle="true">
+          <NavLink to='/contact-us' activestyle>
             Contact Us
           </NavLink>
-          <NavLink to='/signup' activestyle="true">
+          <NavLink to='/signup' activestyle>
             Sign Up
           </NavLink>
         </NavMenu>

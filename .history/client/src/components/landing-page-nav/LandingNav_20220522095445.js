@@ -14,22 +14,24 @@ const LandingNav = () => {
     <>
       <Nav>
         <NavLink to='/'>
-          <img src={logo} alt='logo' />
+          <img src={require('../../assets/img/logo.svg')} alt='logo' />
         </NavLink>
         <Bars />
         <NavMenu>
-          <NavLink to='/about' activestyle="true">
+          <NavLink to='/about' activeStyle>
             About
           </NavLink>
-          <NavLink to='/contact-us' activestyle="true">
+          <NavLink to='/contact-us' activeStyle>
             Contact Us
           </NavLink>
-          <NavLink to='/signup' activestyle="true">
+          <NavLink to='/sign-up' activeStyle>
             Sign Up
           </NavLink>
+          {/* Second Nav */}
+          {/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
         </NavMenu>
         <NavBtn>
-          <NavBtnLink to='/login'>Sign In</NavBtnLink>
+          <NavBtnLink to='/signin'>Sign In</NavBtnLink>
         </NavBtn>
       </Nav>
     </>

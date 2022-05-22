@@ -85,8 +85,8 @@ const Routing = () => {
                 <Route exact path="/" element={<LandingPage/>}/>
                 <Route exact path="/all-requests" element={<RequestList currUserEmail={userEmail.value}/>}/>
                 <Route exact path="/all-offers" element={<OfferList currUserEmail={userEmail.value}/>}/>
-                <Route exact path='/about' element={<About/>} />
-                <Route exact path='/contact-us' element={<Contact/>}/>
+                <Route exact path='/about' component={About} />
+                <Route exact path='/contact-us' component={Contact} />
 
             </Routes>
         </Router>

@@ -5,7 +5,6 @@ import { Container } from 'react-bootstrap';
 //import { auth } from '../../firebase';
 import { Link, useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import LandingNav from '../../components/landing-page-nav/LandingNav';
 
 
 // http://127.0.0.1:5000"
@@ -45,7 +44,6 @@ const Login = () => {
 
 return (
   <>
-  <LandingNav/>
     <Container
       className="d-flex align-items-center justify-content-center"
       style={{ minHeight: "100vh" }}>
