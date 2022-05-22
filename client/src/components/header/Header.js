@@ -11,19 +11,9 @@ import logo from '../../assets/img/dove.svg';
 import axios from "axios";
 import { useNavigate } from "react-router";
 
+import {NavBtn, NavBtnLink } from "../landing-page-nav/NavbarElements";
 
 
-
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-  },
-};
 
 const Header = ({userData}) => {
 
@@ -53,8 +43,8 @@ const Header = ({userData}) => {
   return(
 <>
  {/*{ userEmail.value && (*/}
- {userData && (
-  <Navbar bg="dark" variant="dark" style={customStyles}>
+ {userData.email && (
+  <Navbar className="nav-bar-main">
       <Navbar.Brand href="/home"
       >
         <img
@@ -65,20 +55,21 @@ const Header = ({userData}) => {
           className="d-inline-block align-top"
         />{' '}
         WarWeb
-        {currentUser.value._id}
+        
       </Navbar.Brand>
-      <Link to="/all-requests">
-     <Button bg="dark" variant="dark" type="button" className="btn btn-primary ml-2 mr-2 ">
-          See all requests
-     </Button>
-     </Link>
+    
+     <NavBtn >
+     <NavBtnLink to='/all-requests'>Go to requests</NavBtnLink>
+     </NavBtn>
 
-     <Link to="/all-offers">
-     <Button type="button" bg="dark" variant = "dark" className="btn btn-primary ml-2 mr-2 ">
-          See all offers
-     </Button>
-     </Link>
-  
+     <NavBtn >
+     <NavBtnLink to='/all-offers'>Go to offers</NavBtnLink>
+     </NavBtn>
+    <Navbar.Toggle />
+
+    <NavBtn >
+     <NavBtnLink to='/all-camps'>Go to camps</NavBtnLink>
+     </NavBtn>
     <Navbar.Toggle />
 
         <Navbar.Collapse className="justify-content-end">

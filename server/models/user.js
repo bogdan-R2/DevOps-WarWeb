@@ -7,11 +7,11 @@ const UserSchema = new mongoose.Schema({
     },
     fullName: {
         type: String,
-        default: ""
+        default:""
     },
     postedRequests: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Requests"}],
+        ref:"Requests"}],
     city: {
         type: String, 
         required: [true, "Please select city of the request"]

@@ -66,8 +66,9 @@ const getUsersRequests = () => {
       </Card.Body>
     </Card>
     </div>
-        <Grid className="container" container margin={3} padding={5} spacing={10}>
-            
+    <br></br>
+    <h2 className="title ml-16">Posted Requests/Offers</h2>
+        <Grid className="container" container >
         {requestList.map(request => (
             <Grid key={request._id}>
             <Request 

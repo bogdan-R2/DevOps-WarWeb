@@ -1,14 +1,7 @@
 import React, {useState, useRef, useEffect} from 'react'
 import axios from "axios"
-import firebase from "firebase/compat/app"
-
 import { getAuth, createUserWithEmailAndPassword} from "firebase/auth";
-
-import { Alert, Container, Card } from 'react-bootstrap';
-//import { auth } from '../../firebase';
-import { useAuth } from '../../contexts/AuthContext';
 import { Link, useNavigate } from "react-router-dom";
-
 import './Signup.css'
 import LandingNav from '../../components/landing-page-nav/LandingNav';
 
@@ -28,34 +21,19 @@ const Signup = () => {
     const auth = getAuth();
     const navigate = useNavigate();
     
-
-
-    async function getExistingUser() {
-      try {
-        const response = await axios.get("/user_login/john1904");
-        setUser(response);
-        console.log(response);
-      }
-      catch (error) {
-        console.log(error);
-      }
-    }
-
     async function postUser() {
       try {
-        
-        if(fullName !== "" ) {
 
           axios({
             method: 'post',
-            url: `${API}:5005/api/users`,
+            url: `http:///pweb-api:8091/api/users`,
             data: {
                 email: email, 
                 fullName: fullName,
                 city: city,
                 country: country
             }
-        }) } }catch (error) {
+        }) } catch (error) {
             
             setErrorMessage(error.message);
             throw new Error(error);
@@ -68,6 +46,7 @@ const Signup = () => {
         setErrorMessage("");
         createUserWithEmailAndPassword(auth, email, password);
         postUser();
+        navigate("/");
                  
     }
 
@@ -77,14 +56,12 @@ return (
     <div className="w-100" style={{ maxWidth: "400px" }}>
 
     <form className="signupform" onSubmit={handleSubmit}>
-    
- 
     <fieldset className='filedsets'>
-      <h4>Register here</h4>
+      <h4>Signup</h4>
       <div className="form-group row">
         <label htmlFor="staticEmail" className="col-sm-2 col-form-label"></label>
         <div className="col-sm-10">
-          <input type="text" readOnly className="form-control-plaintext mt-2" id="staticEmail" defaultValue="email@example.com" />
+          <input type="text" readOnly className="form-control-plaintext mt-2 mr-24" id="staticEmail" defaultValue="Example: email@example.com" />
           
         </div>
       </div>
@@ -126,7 +103,7 @@ return (
         <input type="text" 
         onChange={e => setCity(e.target.value)} 
         value={city}
-        className="form-control" id="exampleInputPassword1" placeholder="Enter country" autoFocus/>
+        className="form-control" id="exampleInputPassword1" placeholder="Enter city" autoFocus/>
       </div>
 
      

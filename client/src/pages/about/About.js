@@ -1,20 +1,13 @@
-import React from 'react';
-import LandingNav from '../../components/landing-page-nav/LandingNav';
+import React from "react";
+import Aboutus from "./Aboutus";
+import Footer from "./Footer"
+import LandingNav from "../../components/landing-page-nav/LandingNav";
 
 const About = () => {
   return (
-      <>
-      <LandingNav/>
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '90vh'
-      }}
-    >
-      <h1>About</h1>
-    </div>
+    <>
+      <LandingNav />
+      <Aboutus />
     </>
   );
 };

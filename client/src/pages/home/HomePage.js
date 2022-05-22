@@ -5,13 +5,15 @@ import { useState, useEffect } from "react";
 import { getAuth} from "firebase/auth";
 import { useFetch } from '../../contexts/FetchContext';
 import axios from "axios";
+import "./HomePage.css";
 import { checkPropTypes } from "prop-types";
 import { propTypes } from "react-bootstrap/esm/Image";
 import { Card, Modal, Button } from "react-bootstrap";
 import AddRequestForm from "../../components/requests/AddRequestForm";
 import { useCallback } from "react";
-const API = process.env.REACT_APP_API;
+import HomeImg from "./HomeImg";
 
+const API = process.env.REACT_APP_API;
 
 
 
@@ -26,6 +28,13 @@ const HomePage = (props) => {
     const handleShowFormEnroll = () => setShowFormEnroll(true);
   	const handleCloseFormEnroll = () => setShowFormEnroll(false);
 
+    
+    const onFormSubmit = (e) => {
+      e.preventDefault();
+      handleCloseFormEnroll();
+    };
+
+
     const setAsyncUser = useCallback(async () => {
       try {
         //setUserEmail(getAuth().currentUser.email);
@@ -33,16 +42,14 @@ const HomePage = (props) => {
         setCurrentUser({value: {}, isFetching: true})
         //const userEmailValue = getAuth().currentUser.email;
         console.log("email value in fetch" + emailValue );   
-        console.log(API);
-        const userValue = await axios.get(`${API}:5005/api/users/${emailValue}`);
-
+        const userValue = await axios.get(`http://pweb-api:8091/api/users/${emailValue}`);
         if(!emailValue && userValue.data.data === null ) {
               setCurrentUser({value: {}, isFetching: true}); 
               // a fost false
            }
            else 
            {
-              if(userValue.data.data !== null)
+              if(userValue.data.data !== null && userValue !== undefined)
               {
                   setCurrentUser({value: userValue.data.data, isFetching: false}); 
               }
@@ -53,8 +60,8 @@ const HomePage = (props) => {
         setCurrentUser({value: {}, isFetching: false})
         throw new Error(error);
       }
-    
-    }, [emailValue])
+    // nu era currentUser inainte
+    }, [props.currUserEmail])
     useEffect (() => { 
       setAsyncUser();
   }, [setAsyncUser]);
@@ -62,12 +69,12 @@ const HomePage = (props) => {
 
     return (
     <>
-    {!currentUser.isFetching &&(
+    {!currentUser.isFetching && (
         <>
            <Header userData={currentUser.value}/>
            <Card key={currentUser.value._id}>
             <Card.Header>
-            <Button   onClick={handleShowFormEnroll}>
+            <Button className="btn-add-request" onClick={handleShowFormEnroll}>
 						<b>Add Request/Offer</b>
 					</Button>
             </Card.Header>
@@ -82,11 +89,14 @@ const HomePage = (props) => {
                   <Modal.Title>Add Request/Offer </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                  <AddRequestForm userData={currentUser.value} />
+                  <AddRequestForm onSubmit={onFormSubmit} userData={currentUser.value} />
                 </Modal.Body>
               </Modal>
             </Card.Body>
            </Card>
+           <div className="img">
+           <HomeImg/>
+           </div>
         
 </>
     )}

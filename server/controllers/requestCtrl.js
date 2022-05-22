@@ -1,4 +1,4 @@
-const request = require('../models/request.js');
+const Request = require('../models/request');
 
 
 exports.getRequests = async (req, res, next) => {
@@ -7,7 +7,7 @@ exports.getRequests = async (req, res, next) => {
     const qry = {
       requestType: "Request",
     }
-    const requests = await request.find(qry);
+    const requests = await Request.find(qry);
 
     return res.status(200).json({
       success: true,
@@ -26,7 +26,7 @@ exports.getOffers = async (req, res, next) => {
     const qry = {
       requestType: "Offer",
     }
-    const requests = await request.find(qry);
+    const requests = await Request.find(qry);
 
     return res.status(200).json({
       success: true,
@@ -45,7 +45,7 @@ exports.getRequestsById = async (req, res, next) => {
     const qry = {
       postedBy: req.params._id,
     }
-    const requests = await request.find(qry);
+    const requests = await Request.find(qry);
 
     return res.status(200).json({
       success: true,
@@ -65,7 +65,7 @@ exports.getRequestsByCategory = async (req, res, next) => {
       category: req.params.category,
       requestType: "Request"
     }
-    const requests = await request.find(qry);
+    const requests = await Request.find(qry);
 
     return res.status(200).json({
       success: true,
@@ -85,7 +85,7 @@ exports.getOffersByCategory = async (req, res, next) => {
       category: req.params.category,
       requestType: "Offer"
     }
-    const requests = await request.find(qry);
+    const requests = await Request.find(qry);
 
     return res.status(200).json({
       success: true,
@@ -102,7 +102,7 @@ exports.getOffersByCategory = async (req, res, next) => {
 
 exports.addRequest = async (req, res, next) => {
   try {
-    await request.create(req.body)
+    await Request.create(req.body)
     .then(() => {
         res.status(201).send({
         status: true,
@@ -124,7 +124,7 @@ exports.addRequest = async (req, res, next) => {
 
 exports.editRequest = async (req, res, next) => {
   try {
-    await request.findOneAndUpdate({_id : req.body._id},
+    await Request.findOneAndUpdate({_id : req.body._id},
       {
         $set: {
           "description": req.body.description,
@@ -157,4 +157,20 @@ exports.editRequest = async (req, res, next) => {
     console.error(err);
     res.status(500).json({ error: 'Server error' });
   }
+};
+
+
+exports.deleteRequest = async (req, res, next) => {
+  Request.findByIdAndDelete(req.params._id, function (err, docs) {
+    if (err){
+        console.log(err)
+    }
+    else {
+        console.log("Deleted : ", docs);
+        res.status(200).send({
+          status: true,
+          message: "Request deleted succesfully!",
+          data: docs
+        });
+    }});
 };

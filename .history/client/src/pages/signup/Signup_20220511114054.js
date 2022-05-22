@@ -11,9 +11,9 @@ import { Link, useNavigate } from "react-router-dom";
 
 import './Signup.css'
 
-// http://127.0.0.1:5000"
+// http://127.0.0.1:8091"
 const API = process.env.REACT_APP_API;
-//const API = "http://127.0.0.1:5000"
+//const API = "http://127.0.0.1:8091"
 const Signup = () => {
 
     const [fullName, setFullName] = useState('');
@@ -34,7 +34,7 @@ const Signup = () => {
 
         axios({
           method: 'get',
-          url: `http://127.0.0.1:5000/api/user/${email}`,
+          url: `http://127.0.0.1:8091/api/user/${email}`,
           data: {
               email: email, 
               fullName: fullName,
@@ -60,7 +60,7 @@ const Signup = () => {
        .then (() => {
         axios({
             method: 'post',
-            url: 'http://127.0.0.1:5000/api/user',
+            url: 'http://127.0.0.1:8091/api/user',
             data: {
                 email: email, 
                 fullName: fullName,

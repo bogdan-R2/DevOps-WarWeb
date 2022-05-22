@@ -1,12 +1,9 @@
 import React, {useState, useEffect} from "react";
 import { useNavigate } from "react-router";
 import Request from "./Request";
-import {Grid, ListItem} from "@mui/material"
-import { useFetch } from "../../contexts/FetchContext";
-import { getAuth } from "firebase/auth";
+import {Grid, ListItem, Box} from "@mui/material"
 import axios from 'axios';
 import Header from "../header/Header";
-import Headbar from "../headbar/Headbar";
 import './RequestList.css'
 import { Navbar, Dropdown } from "react-bootstrap";
 
@@ -17,73 +14,36 @@ const RequestList = (props) => {
     const [requestList, setRequestList] = useState([]);
     const [loading, setLoading] = useState(false);
     const [userData, setUserData] = useState({});
-   // const {fetchAllRequests, fetchUserByEmail} = useFetch();
-/*
-    const [userEmail, setUserEmail] = useState({})
-  
-    useEffect (() => { 
-        setUserEmail(getAuth().currentUser.email);
-        console.log(userEmail);
-    }, [])
-    
-
-    useEffect (() => { 
-      const setAsyncUserData = async () => {
-        try {
-            // Initially, userType.value is set {}
-            const user = await fetchUserByEmail(userEmail);
-            console.log("what is this " + user);
-            setUserData(user);
-        } catch (err) {
-            console.log(err);
-            throw new Error(err);
-        }
-    };
-
-    setAsyncUserData();
-  }, [])
-*/
-/*
-useEffect (() => { 
-    const setAsyncRequestsData = async () => {
-      try {
-          // Initially, userType.value is set {}
-          const requests = await fetchAllRequests();
-          console.log("what is this " + requests);
-          console.log("first in his name" +requests[0].city )
-          setRequestList(requests);
-          console.log("dar requestlist cat e " + requestList.value);
-      } catch (err) {
-        setRequestList({value: requestList.value, isFetching: false});
-          console.log(err);
-          throw new Error(err);
-      }
-  };
-
-  setAsyncRequestsData();
-}, [])
-*/
     const categories = ['Medicine', 'Money', 'Food', 'Clothing', 'Hygiene Products', 'All Requests'];
     const [selectedCategory, setSelectedCategory] = useState("Category");
+    const [deletedRequest, setDeletedRequest] = useState({});
+
+    useEffect(() => {
+        getAllRequests();
+        //getCurrentUser();
+    }, [selectedCategory, deletedRequest]);
+
+    useEffect(() => {
+        //getAllRequests();
+        getCurrentUser();
+    }, [props.currUserEmail]);
 
 
+    const handleSelectCategory = (e) => {
+        setSelectedCategory(e);
+    };
+    
+    const handleDelete = async () =>{
+        await axios.delete(`http://pweb-api:8091/api/request/delete/${props.userRequest._id}`)
+        .then((response) => {
+            console.log("request deleted neew dis " + response.data.data);
+            const deleted = response.data.data;
+            setDeletedRequest(deleted);
+        })
+        .catch(error => console.error(`Error: ${error}`));
+    }
 
-const handleSelectCategory = (e) => {
-  setSelectedCategory(e);
-};
-
-
-useEffect(() => {
-    getAllRequests();
-    //getCurrentUser();
-}, [selectedCategory]);
-
-useEffect(() => {
-    //getAllRequests();
-    getCurrentUser();
-}, [props.currUserEmail]);
-
-const getAllRequests = async () => {
+    const getAllRequests = async () => {
     console.log("selected category " + selectedCategory);
     ///request/by-category/:category
 
@@ -139,19 +99,19 @@ return(
     <>
     {requestList &&  userData && loading &&(
         <>
-     <Headbar userData={userData}/> 
+     <Header userData={userData}/> 
      <br></br>
      <div className="flexbox-container">
-     <h2> Select category for offer:</h2>
+     <h3> Select category:</h3>
 
-     <Dropdown
+     <Dropdown className="drop-main"
         title={selectedCategory}
         id="dropdown-menu-align-right"
         onSelect={handleSelectCategory}>
-            <Dropdown.Toggle variant="success" id="dropdown-basic">
+            <Dropdown.Toggle className="drop-toggle" variant="success" id="dropdown-basic">
                 {selectedCategory}
             </Dropdown.Toggle>
-              <Dropdown.Menu>
+              <Dropdown.Menu className="drop-menu">
              {categories.map((category) => (
                 <Dropdown.Item eventKey={category}>{category}</Dropdown.Item>
               ))}
@@ -163,12 +123,14 @@ return(
         
     {
         requestList.map(request => (
-        <Grid key={request._id}>
-        <Request 
+            <ul>
+        <li  key={request._id}>
+        <Request
         userRequest = {request}
         userData={userData}
         />
-        </Grid>
+        </li>
+        </ul>
     ))}
 
     </Grid>

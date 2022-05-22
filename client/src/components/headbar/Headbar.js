@@ -35,7 +35,7 @@ async function handleLogout() {
     return(
         <>
         <Navbar bg="dark" variant="dark">
-        <Navbar.Brand> <img
+        <Navbar.Brand  href="/home"> <img
           alt=""
           src = { logo }
           width="30"
@@ -43,9 +43,6 @@ async function handleLogout() {
           className="d-inline-block align-top"
         />{' '}
         WarWeb</Navbar.Brand>
-        <Nav className="me-auto">
-          <Nav.Link href="/home">Home</Nav.Link>
-        </Nav>
         <Navbar.Collapse className="justify-content-end">
           <NavDropdown
             title={userData.email}

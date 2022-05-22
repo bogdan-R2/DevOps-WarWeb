@@ -66,7 +66,6 @@ export const NavBtnLink = styled(Link)`
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   text-decoration: none;
-  /* Second Nav */
   margin-left: 24px;
   &:hover {
     transition: all 0.2s ease-in-out;

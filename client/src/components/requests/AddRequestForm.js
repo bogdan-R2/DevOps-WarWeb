@@ -12,18 +12,18 @@ import axios from "axios";
 
 
 
-const AddRequestForm = ({ userData }) => {
+const AddRequestForm = ({ userData, onSubmit }) => {
+
   const descriptionRef = useRef();
   const cityRef = useRef();
   const countryRef = useRef();
   const phoneNumberRef = useRef();
   const [selectedDay, setSelectedDay] = useState("Select");
   const categories = ['Medicine', 'Money', 'Food', 'Clothing', 'Hygiene Products'];
- // enum: ['Medicine', 'Money', 'Food', 'Clothing', 'Hygiene Products'],
- const [selectedCategory, setSelectedCategory] = useState("Select");
- const [selectedRequestType, setSelectedRequestType] = useState("Select");
- const userId = userData._id;
- const [errorMessage, setErrorMessage] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("Select");
+  const [selectedRequestType, setSelectedRequestType] = useState("Select");
+  const userId = userData._id;
+  const [errorMessage, setErrorMessage] = useState("");
 
   const [selectedRequests, setSelectedrequests] = useState("Select");
   const requests = [
@@ -77,12 +77,12 @@ const AddRequestForm = ({ userData }) => {
       setError("");
       setLoading(true);
       postRequest();
+      onSubmit();
+
     }
     catch(error) {
         throw new Error(error);
     }
-
-
     setLoading(false);
   }
 

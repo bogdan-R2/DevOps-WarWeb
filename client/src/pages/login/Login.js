@@ -17,10 +17,6 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [country, setCountry] = useState('');
-    const [city, setCity] = useState('');
-    const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false);
-    const [user, setUser] = useState();
     const [errorMessage, setErrorMessage] = useState('');
     const auth = getAuth();
     const navigate = useNavigate();
@@ -48,14 +44,14 @@ return (
   <LandingNav/>
     <Container
       className="d-flex align-items-center justify-content-center"
-      style={{ minHeight: "100vh" }}>
+      style={{ height: "500px" }}>
     <form className="signupform" onSubmit={handleSubmit}>
     <fieldset>
-      <legend>Legend</legend>
+      <legend>Login</legend>
       <div className="form-group row">
-        <label htmlFor="staticEmail" className="col-sm-2 col-form-label">Email</label>
+        <label htmlFor="staticEmail" className="col-sm-2 col-form-label">Example:</label>
         <div className="col-sm-10">
-          <input type="text" readOnly className="form-control-plaintext" id="staticEmail" defaultValue="email@example.com" />
+          <input type="text" readOnly className="form-control-plaintext ml-8" id="staticEmail" defaultValue="email@example.com" />
           
         </div>
       </div>
@@ -77,8 +73,10 @@ return (
         value={password}
         className="form-control" id="inputName" placeholder="Enter password" autoFocus/>
     </div>    
+    <br></br>
         <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
-      <button type="submit" className="btn btn-primary">Submit</button>
+        <br></br>
+      <button type="submit" className="btn btn-primary mt-6">Submit</button>
     </fieldset>
   </form>
   </Container>

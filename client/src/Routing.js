@@ -17,7 +17,7 @@ import Profile from "./pages/profile/Profile";
 import ReactLoading from "react-loading";
 import Contact from "./pages/contact/Contact";
 import About from "./pages/about/About";
-
+import CampList from "./components/camps/CampList";
 
 
 const Routing = () => {
@@ -32,8 +32,6 @@ const Routing = () => {
         auth.onAuthStateChanged(function(currUser){
           if(currUser) {
             setUserEmail({value: userEmail.value, isFetching: true})
-            //const userEmailValue = getAuth().currentUser.email;
-            //const userEmailValue = user.email;
             const userEmailValue = currUser.email;
             if(!userEmail) {
               setUserEmail({value: {}, isFetching: false})
@@ -45,20 +43,6 @@ const Routing = () => {
           }
           
         })
-
-        /*
-        setUserEmail({value: userEmail.value, isFetching: true})
-        //const userEmailValue = getAuth().currentUser.email;
-        const userEmailValue = user.email;
-        if(!userEmail) {
-          setUserEmail({value: {}, isFetching: false})
-        } else if(userEmail!== undefined)
-         {
-         setUserEmail({value: userEmailValue, isFetching: false})
-         
-        }
-        */
-
       } catch(error) {
         setUserEmail({value: {}, isFetching: false})
         throw new Error(error);
@@ -72,7 +56,6 @@ const Routing = () => {
         setAsyncUserEmail();
       }, 1000);
   }, [setAsyncUserEmail]);
-// add timeout unde face use effect figuri
     return (
         <>
         {userEmail.value && (
@@ -85,6 +68,7 @@ const Routing = () => {
                 <Route exact path="/" element={<LandingPage/>}/>
                 <Route exact path="/all-requests" element={<RequestList currUserEmail={userEmail.value}/>}/>
                 <Route exact path="/all-offers" element={<OfferList currUserEmail={userEmail.value}/>}/>
+                <Route exact path="/all-camps" element={<CampList currUserEmail={userEmail.value}/>}/>
                 <Route exact path='/about' element={<About/>} />
                 <Route exact path='/contact-us' element={<Contact/>}/>
 

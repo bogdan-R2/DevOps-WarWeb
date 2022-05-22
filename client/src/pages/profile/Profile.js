@@ -11,7 +11,6 @@ const API = process.env.REACT_APP_API;
 const Profile = (props) => {
 
     console.log("profile page " + props.currUserEmail)
-    // todo add error messages
     const [currentUser, setCurrentUser] = useState({value: {}, isFetching: false});
     const emailValue = props.currUserEmail;
     const [showFormEnroll, setShowFormEnroll] = useState(false);

@@ -1,7 +1,7 @@
 const  express = require("express");
 const  mongoose = require("mongoose");
 const bodyParser = require( "body-parser");
-const cors = require('cors')
+const cors = require('cors')({origin:true});
 const api = require("./api")
 const morgan =  require("morgan")
 const config = require('./config/database');
@@ -10,7 +10,8 @@ const server = require('http').createServer();
 
 const app = express();
 
-app.set('port', (process.env.PORT || 5005))
+
+app.set('port', (process.env.PORT || 8091))
 
 // Bodyparser middleware
 app.use(bodyParser.json());
