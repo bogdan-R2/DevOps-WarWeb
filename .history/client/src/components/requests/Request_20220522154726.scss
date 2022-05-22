@@ -1,0 +1,38 @@
+.card {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: transform 200ms ease-in;
+  
+    &title {
+      padding: 1rem;
+    }
+  
+    &description {
+      padding: 0 1rem;
+    }
+  
+    &btn {
+      padding: 1rem;
+      font-family: inherit;
+      font-weight: bold;
+      font-size: 1rem;
+      margin: 1rem;
+      border: 2px solid $clr-primary;
+      background: transparent;
+      color: $clr-primary;
+      border-radius: $radius;
+      transition: background 200ms ease-in, color 200ms ease-in;
+    }
+  
+    &:hover {
+      transform: scale(1.02);
+    }
+  
+    &:hover &__btn {
+      background: $clr-primary;
+      color: white;
+    }
+  }

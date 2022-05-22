@@ -1,0 +1,17 @@
+.signupform {
+    margin: auto;
+    margin-top: 20px;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+    width: 100%;
+    height: fit-content;
+    box-sizing: border-box;
+    text-align: center;
+    border: 2px;
+
+}
+

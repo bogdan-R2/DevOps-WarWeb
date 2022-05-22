@@ -1,0 +1,14 @@
+.box {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  .box div {
+    width: 200px;
+    height: 60px;
+    flex-direction: center;
+  }
+     
