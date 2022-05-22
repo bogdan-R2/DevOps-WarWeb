@@ -53,8 +53,10 @@ const Header = ({userData}) => {
   return(
 <>
  {/*{ userEmail.value && (*/}
-  <Navbar bg="dark"  style={customStyles}>
-      <Navbar.Brand href="/home">
+ {userData && (
+  <Navbar bg="dark" variant="dark" style={customStyles}>
+      <Navbar.Brand href="/home"
+      >
         <img
           alt=""
           src = { logo }
@@ -66,16 +68,17 @@ const Header = ({userData}) => {
         {currentUser.value._id}
       </Navbar.Brand>
       <Link to="/all-requests">
-     <Button type="button" className="btn btn-primary ml-2 mr-2">
+     <Button bg="dark" variant="dark" type="button" className="btn btn-primary ml-2 mr-2 ">
           See all requests
      </Button>
      </Link>
 
      <Link to="/all-offers">
-     <button type="button" className="btn btn-primary ml-2 mr-2 ">
+     <Button type="button" bg="dark" variant = "dark" className="btn btn-primary ml-2 mr-2 ">
           See all offers
-     </button>
+     </Button>
      </Link>
+  
     <Navbar.Toggle />
 
         <Navbar.Collapse className="justify-content-end">
@@ -90,6 +93,7 @@ const Header = ({userData}) => {
           </Navbar.Collapse>
 
   </Navbar>
+  )}
 {/*)}*/}
 
 </>

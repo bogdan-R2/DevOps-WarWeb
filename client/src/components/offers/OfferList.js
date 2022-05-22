@@ -25,7 +25,7 @@ const OfferList = (props) => {
     }, [props.currUserEmail]);
     
     const getAllRequests = async () => {
-        await axios.get("http://127.0.0.1:5000/api/request/offers")
+        await axios.get("http://pweb-api:5000/api/request/offers")
         .then((response) => {
             const allRequests = response.data.data;
             setRequestList(allRequests);
@@ -35,7 +35,7 @@ const OfferList = (props) => {
     
     const getCurrentUser = async () => {
         if(props.currUserEmail !== undefined) {
-        await axios.get(`http://127.0.0.1:5000/api/users/${props.currUserEmail}`)
+        await axios.get(`http://pweb-api:5000/api/users/${props.currUserEmail}`)
         .then((response) => {
             const allRequests = response.data.data;
             setUserData(allRequests);

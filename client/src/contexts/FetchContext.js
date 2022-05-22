@@ -19,7 +19,7 @@ async function fetchAllRequests() {
     let requests = [];
     let reqData = [];
     try {
-        reqData = await axios.get("http://127.0.0.1:5000/api/request");
+        reqData = await axios.get("http://pweb-api:5000/api/request");
         console.log(reqData);
     } catch (error) {
         console.log(error.message);
@@ -40,7 +40,7 @@ async function fetchUserByEmail(email) {
     let user = {};
 
     try {
-        user = await axios.get("http://127.0.0.1:5000/api/users", 
+        user = await axios.get("http://pweb-api:5000/api/users", 
         {
             params: {
                 email: email

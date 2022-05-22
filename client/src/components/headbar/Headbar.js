@@ -12,7 +12,14 @@ const Headbar = ({userData}) => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const auth = getAuth();
+  const categories = ['Medicine', 'Money', 'Food', 'Clothing', 'Hygiene Products'];
+  const [selectedCategory, setSelectedCategory] = useState("Select");
 
+
+
+  const handleSelectCategory = (e) => {
+    setSelectedCategory(e);
+  };
 async function handleLogout() {
   setError("");
 
@@ -38,8 +45,6 @@ async function handleLogout() {
         WarWeb</Navbar.Brand>
         <Nav className="me-auto">
           <Nav.Link href="/home">Home</Nav.Link>
-          <Nav.Link href="#features">Features</Nav.Link>
-          <Nav.Link href="#pricing">Pricing</Nav.Link>
         </Nav>
         <Navbar.Collapse className="justify-content-end">
           <NavDropdown

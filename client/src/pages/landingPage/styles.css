@@ -56,7 +56,8 @@ section {
     color: rgb(3, 3, 82);
     font-size: 2rem;
     line-height: 1.5em;
-    width: 70%;
+    width: 50%;
+    margin-bottom: 2.5%;
 }
 
 
@@ -68,11 +69,12 @@ section {
     width: 60%;
     margin-left: auto;
     margin-top: 95px;
+    margin-right: 10px;
         
     /* Set up positioning */
     position: absolute;
     top: 0;
-    right: 0%;
+    right: 2%;
     left: 100px;
     z-index: -1;
 

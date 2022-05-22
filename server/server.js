@@ -7,6 +7,7 @@ const morgan =  require("morgan")
 const config = require('./config/database');
 const server = require('http').createServer();
 
+
 const app = express();
 
 app.set('port', (process.env.PORT || 5000))
@@ -38,7 +39,7 @@ const db = mongoURI;
 console.log(db);
 // Connect to MongoDB
 mongoose
-  .connect('mongodb://admin:admin@mongo:27017/pweb', { useNewUrlParser: true })
+  .connect("mongodb://admin:admin@mongo:27017/pweb",{ useNewUrlParser: true })
   .then(() => console.log("MongoDB successfully connected"))
   .catch(err => console.log(err));
 

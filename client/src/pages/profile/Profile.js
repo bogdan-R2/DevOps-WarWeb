@@ -3,6 +3,9 @@ import axios from 'axios';
 import { useCallback } from 'react';
 import Header from '../../components/header/Header';
 import ProfileComponent from '../../components/profile/ProfileComponent';
+const API = process.env.REACT_APP_API;
+
+
 
 
 const Profile = (props) => {
@@ -23,7 +26,7 @@ const Profile = (props) => {
         setCurrentUser({value: {}, isFetching: true})
         //const userEmailValue = getAuth().currentUser.email;
         console.log("email value in fetch" + emailValue );   
-        const userValue = await axios.get(`http://127.0.0.1:5000/api/users/${emailValue}`);
+        const userValue = await axios.get(`http://pweb-api:5000/api/users/${emailValue}`);
 
         if(!emailValue && userValue.data.data === null ) {
               setCurrentUser({value: {}, isFetching: true}); 

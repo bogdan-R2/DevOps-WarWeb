@@ -47,14 +47,17 @@ exports.getAllUsers = async (req, res, next) => {
   
   exports.addUser = async (req, res) => {
     try {
-    let query = req.body.email; //Extract title from input form
+    let query = req.body.email;
+
     User.findOne({email:query}, function(err, foundUser){
         if(err) console.log(err);
         if ( foundUser){
             console.log("This email is already registered");
+            
         } else {
  
             let newUser = new User(req.body);
+            console.log("user nou in baza de date" + newUser);
             newUser.save(function(err, example) {
                 if(err) console.log(err);
                 console.log("New user created");

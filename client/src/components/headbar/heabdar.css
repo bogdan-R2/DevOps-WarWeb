@@ -1,5 +1,5 @@
 .container-fluid {
-    width: 100%
+    width: 100%;
 }
 
 .navbar{
@@ -11,3 +11,11 @@
     width: 100% !important;
 }
 
+#navbarScrollingDropdown {
+    color: black;
+}
+
+
+#nav-bar-categories {
+    color: whitesmoke;
+}

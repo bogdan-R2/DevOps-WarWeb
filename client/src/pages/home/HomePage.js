@@ -10,6 +10,10 @@ import { propTypes } from "react-bootstrap/esm/Image";
 import { Card, Modal, Button } from "react-bootstrap";
 import AddRequestForm from "../../components/requests/AddRequestForm";
 import { useCallback } from "react";
+const API = process.env.REACT_APP_API;
+
+
+
 
 const HomePage = (props) => {
     
@@ -29,7 +33,8 @@ const HomePage = (props) => {
         setCurrentUser({value: {}, isFetching: true})
         //const userEmailValue = getAuth().currentUser.email;
         console.log("email value in fetch" + emailValue );   
-        const userValue = await axios.get(`http://127.0.0.1:5000/api/users/${emailValue}`);
+        console.log(API);
+        const userValue = await axios.get(`${API}:5000/api/users/${emailValue}`);
 
         if(!emailValue && userValue.data.data === null ) {
               setCurrentUser({value: {}, isFetching: true}); 
@@ -37,8 +42,6 @@ const HomePage = (props) => {
            }
            else 
            {
-              console.log("email value in else "+ emailValue );
-              console.log("email is " + emailValue)
               if(userValue.data.data !== null)
               {
                   setCurrentUser({value: userValue.data.data, isFetching: false}); 
@@ -64,8 +67,8 @@ const HomePage = (props) => {
            <Header userData={currentUser.value}/>
            <Card key={currentUser.value._id}>
             <Card.Header>
-            <Button variant="primary" onClick={handleShowFormEnroll}>
-						Add Request/Offer
+            <Button   onClick={handleShowFormEnroll}>
+						<b>Add Request/Offer</b>
 					</Button>
             </Card.Header>
             <Card.Body>

@@ -5,11 +5,12 @@ import { Container } from 'react-bootstrap';
 //import { auth } from '../../firebase';
 import { Link, useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import LandingNav from '../../components/landing-page-nav/LandingNav';
 
 
-// http://127.0.0.1:5000"
+// http://pweb-api:5000"
 const API = process.env.REACT_APP_API;
-//const API = "http://127.0.0.1:5000"
+//const API = "http://pweb-api:5000"
 const Login = () => {
 
     const [fullName, setFullName] = useState('');
@@ -43,6 +44,8 @@ const Login = () => {
     }
 
 return (
+  <>
+  <LandingNav/>
     <Container
       className="d-flex align-items-center justify-content-center"
       style={{ minHeight: "100vh" }}>
@@ -69,7 +72,7 @@ return (
 
     <div className="form-group">
         <label htmlFor="exampleInputPassword" className="form-label mt-4">Password</label>
-        <input type="text" 
+        <input type="password" 
         onChange={e => setPassword(e.target.value)} 
         value={password}
         className="form-control" id="inputName" placeholder="Enter password" autoFocus/>
@@ -78,7 +81,8 @@ return (
       <button type="submit" className="btn btn-primary">Submit</button>
     </fieldset>
   </form>
-  </Container>);
+  </Container>
+  </>);
 
     
 }

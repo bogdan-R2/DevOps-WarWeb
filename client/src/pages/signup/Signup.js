@@ -2,7 +2,7 @@ import React, {useState, useRef, useEffect} from 'react'
 import axios from "axios"
 import firebase from "firebase/compat/app"
 
-import { getAuth, createUserWithEmailAndPassword, getRedirectResult } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword} from "firebase/auth";
 
 import { Alert, Container, Card } from 'react-bootstrap';
 //import { auth } from '../../firebase';
@@ -10,11 +10,14 @@ import { useAuth } from '../../contexts/AuthContext';
 import { Link, useNavigate } from "react-router-dom";
 
 import './Signup.css'
+import LandingNav from '../../components/landing-page-nav/LandingNav';
 
 const API = process.env.REACT_APP_API;
+
+
 const Signup = () => {
 
-    const [fullName, setFullName] = useState('');
+    const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [country, setCountry] = useState('');
@@ -40,21 +43,25 @@ const Signup = () => {
 
     async function postUser() {
       try {
-        console.log('ajunge in post')
-        axios({
-        method: 'post',
-        url: 'http://127.0.0.1:5000/api/users',
-        data: {
-            email: email, 
-            fullName: fullName,
-            city: city,
-            country: country
-     }
-    })}
-      catch (error) {
-        setErrorMessage(error);
-      }
-    }
+        
+        if(fullName !== "" ) {
+
+          axios({
+            method: 'post',
+            url: `${API}:5000/api/users`,
+            data: {
+                email: email, 
+                fullName: fullName,
+                city: city,
+                country: country
+            }
+        }) } }catch (error) {
+            
+            setErrorMessage(error.message);
+            throw new Error(error);
+          }
+        }
+       
 
     async function handleSubmit() {
         console.log("sending");
@@ -65,7 +72,8 @@ const Signup = () => {
     }
 
 return (
-  
+  <>
+  <LandingNav/>
     <div className="w-100" style={{ maxWidth: "400px" }}>
 
     <form className="signupform" onSubmit={handleSubmit}>
@@ -89,19 +97,18 @@ return (
     </div>
     <div className="form-group">
         <label htmlFor="exampleInputPassword" className="form-label mt-4">Password</label>
-        <input type="text" 
+        <input type="password" 
         onChange={e => setPassword(e.target.value)} 
         value={password}
-        className="form-control" id="inputName" placeholder="Enter password" autoFocus/>
+        className="form-control" id="password" placeholder="Enter password" autoFocus/>
     </div>    
     
-     
         <div className="form-group">
-        <label d="inputName" className="form-label mt-4">Name</label>
+        <label htmlFor="exampleInputName" className="form-label mt-4">Name</label>
         <input type="text" 
         onChange={e => setFullName(e.target.value)} 
         value={fullName}
-        className="form-control" id="inputName" placeholder="Enter complete name" />
+        className="form-control" id="fullName" placeholder="Enter complete name" autoFocus/>
       </div>
 
       
@@ -131,7 +138,7 @@ return (
   </form>
   
 </div>
-
+</>
     );
 
     

@@ -12,20 +12,19 @@ import axios from "axios";
 
 
 
-const AddRequestForm = ({ userData }) => {
-  const descriptionRef = useRef();
-  const cityRef = useRef();
-  const countryRef = useRef();
-  const phoneNumberRef = useRef();
-  const [selectedDay, setSelectedDay] = useState("Select");
+const EditRequest = ({ requestData }) => {
+  const [description, setDescription] = useState(requestData.description);
+  const [city, setCity] = useState(requestData.city);
+  const [country, setCountry] = useState(requestData.country);
+  const [phoneNumber, setPhoneNumber] = useState(requestData.phoneNumber);
+  const [selectedDay, setSelectedDay] = useState(requestData.category);
   const categories = ['Medicine', 'Money', 'Food', 'Clothing', 'Hygiene Products'];
  // enum: ['Medicine', 'Money', 'Food', 'Clothing', 'Hygiene Products'],
- const [selectedCategory, setSelectedCategory] = useState("Select");
- const [selectedRequestType, setSelectedRequestType] = useState("Select");
- const userId = userData._id;
+ const [selectedCategory, setSelectedCategory] = useState(requestData.category);
+ const [selectedRequestType, setSelectedRequestType] = useState(requestData.requestType);
  const [errorMessage, setErrorMessage] = useState("");
 
-  const [selectedRequests, setSelectedrequests] = useState("Select");
+  //const [selectedRequests, setSelectedrequests] = useState("Select");
   const requests = [
     "Offer",
     "Request"];
@@ -45,24 +44,23 @@ const AddRequestForm = ({ userData }) => {
   async function postRequest() {
     try {
       console.log('ajunge in post');
-      const requestData = {
-        description: descriptionRef.current.value,  
+      const request = {
+        _id: requestData._id,
+        description: description,
         requestType: selectedRequestType,
-        city: cityRef.current.value, // string
-        country: countryRef.current.value, // string
+        city: city, // string
+        country: country, // string
         category: selectedCategory,
-        phoneNumber: phoneNumberRef.current.value, // string
-        postedBy: userData._id,
+        phoneNumber: phoneNumber, // string
       }
 
-      if(userId !== null && requestData !== null) {
-          console.log("asta e aici" + userId);
-          console.log(requestData);
+      if(request !== null) {
+        console.log("requestul trimis" + request);
           
-      axios({
-      method: 'post',
-      url: 'http://pweb-api:5000/api/request',
-      data: requestData
+        axios({
+        method: 'put',
+        url: 'http://pweb-api:5000/api/request/update',
+        data: request
   })}}
     catch (error) {
       setError(error);
@@ -84,30 +82,31 @@ const AddRequestForm = ({ userData }) => {
 
 
     setLoading(false);
+    
   }
 
   return (
     <Card>
       <Card.Body>
-        <h2 className="text-center mb-4">Add New Request/Offer</h2>
+        <h2 className="text-center mb-4">Edit Your Request/Offer</h2>
         {error && <Alert variant="danger">{error}</Alert>}
         <Form onSubmit={handleSubmit}>
           
          
           <Form.Group id="city">
             <Form.Label>City</Form.Label>
-            <Form.Control type="city" ref={cityRef} required />
+            <Form.Control type="city" onChange={e=> setCity(e.target.value)}/>
           </Form.Group>
           
           <Form.Group id="country">
             <Form.Label>Country</Form.Label>
-            <Form.Control type="country" ref={countryRef} required />
+            <Form.Control type="country" onChange={e=>setCountry(e.target.value)}/>
           </Form.Group>
 
 
           <Form.Group id="phoneNumber">
             <Form.Label>Phone Number</Form.Label>
-            <Form.Control type="phoneNumber" ref={phoneNumberRef} required />
+            <Form.Control type="phoneNumber" onChange={e=>setPhoneNumber(e.target.value)}/>
           </Form.Group>
         
 
@@ -142,7 +141,7 @@ const AddRequestForm = ({ userData }) => {
           </Form.Group>
           <Form.Group id="description">
             <Form.Label>Description</Form.Label>
-            <Form.Control type="description" ref={descriptionRef} required />
+            <Form.Control type="description" onChange={e=>setDescription(e.target.value)}/>
           </Form.Group>
           <br />
           <Button className="w-100" type="submit" disabled={loading}>
@@ -154,4 +153,4 @@ const AddRequestForm = ({ userData }) => {
   );
 };
 
-export default AddRequestForm;
+export default EditRequest;

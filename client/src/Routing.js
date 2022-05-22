@@ -15,6 +15,8 @@ import { Navigate } from "react-router-dom";
 import { auth } from "./firebase";
 import Profile from "./pages/profile/Profile";
 import ReactLoading from "react-loading";
+import Contact from "./pages/contact/Contact";
+import About from "./pages/about/About";
 
 
 
@@ -83,6 +85,8 @@ const Routing = () => {
                 <Route exact path="/" element={<LandingPage/>}/>
                 <Route exact path="/all-requests" element={<RequestList currUserEmail={userEmail.value}/>}/>
                 <Route exact path="/all-offers" element={<OfferList currUserEmail={userEmail.value}/>}/>
+                <Route exact path='/about' element={<About/>} />
+                <Route exact path='/contact-us' element={<Contact/>}/>
 
             </Routes>
         </Router>

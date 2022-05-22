@@ -21,22 +21,6 @@ const RequestSchema = new mongoose.Schema({
         type: String, 
         required: [true, 'Please insert country']
     },
-    /*
-    location: {
-        locType: {
-          type: String,
-          enum: ['Point'],
-          default: 'Point'
-        },
-        coordinates: {
-          type: [Number],
-          index: '2dsphere'
-        },
-        formattedAddress: {
-            type: String
-        }
-    },*/
-
     category: {
         type: String,
         enum: ['Medicine', 'Money', 'Food', 'Clothing', 'Hygiene Products'],

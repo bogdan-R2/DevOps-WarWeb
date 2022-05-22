@@ -1,10 +1,8 @@
 import "./styles.css";
 import "./LandingPageStyling.css";
 import { Link, useNavigate } from "react-router-dom";
-import HeroImg from "../../assets/img/peace-landing-svg.svg";
-//src={require('../../assets/img/peace-landing-svg.svg')}
-import { Header } from "../../components/header/Header";
-import Headbar from "../../components/headbar/Headbar";
+import LandingNav from "../../components/landing-page-nav/LandingNav";
+
 const LandingPage = () => {
     const navigate = useNavigate();
 
@@ -12,15 +10,13 @@ const LandingPage = () => {
         navigate("/signup")
     }
   return (
-      
-      <>
-      
+      <>  
+    <LandingNav/>
     <section className="HeroSec">
       <div className="contentWrapper">
         <div className="leftContent">
         <h2>Do you want to help or need help?</h2>
-        <button type="button" className="btn btn-primary btn-lg" onClick={handleClick}>Register Now</button>
-        <p className="w-100 text-left"/> Already have an account? <Link to="/login">Log In</Link>
+        <button type="button" className="btn btn-info btn-lg " onClick={handleClick}>Register Now</button>
         </div>
         <div className="rigthContent">
           <div className="heroImg">
